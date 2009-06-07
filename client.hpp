@@ -12,7 +12,7 @@ oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GN
 Public License.
 Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Programm
 erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
-**/
+*/
 
 #ifndef CLIENT_HPP_INCLUDED
 #define CLIENT_HPP_INCLUDED
