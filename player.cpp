@@ -127,14 +127,14 @@ void CPlayer::Control()
 			{
 				right_pressed_p1 = true;
 			}
-			if (g_Event.key.keysym.sym == SDLK_j)
+			if (g_Event.key.keysym.sym == SDLK_j && (iPlayerPoint > 9 || iCpuPoint > 9))
 			{
                 iPlayerPoint = 0;
                 iCpuPoint = 0;
                 Reset();
                 return;
 			}
-			if (g_Event.key.keysym.sym == SDLK_n)
+			if (g_Event.key.keysym.sym == SDLK_n && (iPlayerPoint > 9 || iCpuPoint > 9))
 			{
                 pFramework->done = true;
                 return;
@@ -310,10 +310,18 @@ void CPlayer::Reset()
         Ball.x = (WWIDTH/2-BALLWH/2);
         Ball.y = (WHEIGHT/2-BALLWH/2);
         iBall_Speed_X = 0;
+    }
+    if (Ball.y > WHEIGHT)
+    {
         iBall_Speed_Y = 10;
     }
-
+    if (Ball.y < 0)
+    {
+        iBall_Speed_Y = -10;
+    }
 }
+
+
 
 void CPlayer::Points()
 {
