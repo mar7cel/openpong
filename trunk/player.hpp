@@ -21,6 +21,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include "server.hpp"
 #include "client.hpp"
 #include "menu.hpp"
+#include "sound.hpp"
 
 class CPlayer
 {
@@ -46,6 +47,9 @@ class CPlayer
                 CSprite *pComputer;     //Spieler Bild
                 CSprite *pBall;         //Ball Bild
                 CSprite *pBack;         //Hintergrundbild
+                CSound *pSoundPlayer;   //Sound für den Player
+                CSound *pSoundCpu;
+
                 SDL_Rect Player;        //Rect des Players
                 SDL_Rect Computer;      //Rect des Players
                 SDL_Rect Ball;          //Rect des Balles
