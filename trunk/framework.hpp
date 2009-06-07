@@ -20,6 +20,8 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include <SDL.h>
 #include <SDL_net.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
+
 #include <iostream>
 #include <time.h>
 #include <sstream>
