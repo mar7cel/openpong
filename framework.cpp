@@ -22,7 +22,7 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
                         int iColorDepth, bool bFullScreen)
 {
     //Systeme der SDL Initialisieren
-    if(SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
+    if(SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) == -1)
     {
         cout << "SDL konnte nicht Initialisiert werden!" << endl;
         cout << "Fehlermeldung: " << SDL_GetError() << endl;
