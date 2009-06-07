@@ -25,7 +25,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include <sstream>
 #include "singleton.hpp"
 
-#define WCAPTION "Pong"
+#define WCAPTION "OpenPong"
 #define WWIDTH 800
 #define WHEIGHT 600
 #define WDEPTH 16
