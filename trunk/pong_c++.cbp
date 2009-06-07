@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\Debug\pong_c++" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="bin/Debug/pong_c++" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -16,13 +16,14 @@
 				</Compiler>
 				<Linker>
 					<Add option="`sdl-config --libs`" />
-					<Add library="libs\libSDL_net-1.2.so" />
-					<Add library="libs\libSDL_ttf-2.0.so" />
+					<Add library="libs/libSDL_net-1.2.so" />
+					<Add library="libs/libSDL_ttf-2.0.so" />
+					<Add library="libs/libSDL_mixer.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\pong_c++" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="bin/Release/pong_c++" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -30,8 +31,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="bin\Release\libs\libSDL_net-1.2.so" />
-					<Add library="bin\Release\libs\libSDL_ttf-2.0.so" />
+					<Add library="bin/Release/libs/libSDL_net-1.2.so" />
+					<Add library="bin/Release/libs/libSDL_ttf-2.0.so" />
 				</Linker>
 			</Target>
 		</Build>
@@ -56,6 +57,8 @@
 		<Unit filename="server.cpp" />
 		<Unit filename="server.hpp" />
 		<Unit filename="singleton.hpp" />
+		<Unit filename="sound.cpp" />
+		<Unit filename="sound.hpp" />
 		<Unit filename="sprite.cpp" />
 		<Unit filename="sprite.hpp" />
 		<Extensions>
