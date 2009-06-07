@@ -35,6 +35,8 @@ CPlayer::~CPlayer()
     delete (pComputer);
     delete (pBall);
     delete (pBack);
+    delete (pSoundPlayer);
+    delete (pSoundCpu);
 }
 
 //Init
@@ -45,6 +47,11 @@ void CPlayer::Init()
     pComputer = new CSprite;
     pBall = new CSprite;
     pBack = new CSprite;
+    pSoundPlayer = new CSound;
+    pSoundCpu = new CSound;
+
+    pSoundPlayer->LoadSound("sound/pong1.wav");
+    pSoundCpu->LoadSound("sound/pong2.wav");
 
 
         pPlayer->Load("gfx/game/player.bmp");
@@ -229,7 +236,7 @@ bool CPlayer::Collision(SDL_Rect a , SDL_Rect b)
 
         /*    if  (( b.y < a.y + a.h ) && ( b.y + b.h > a.y ) &&
                 ( b.x < a.x + a.w ) && ( b.x + b.w > a.x )) return true;*/
-	return true;
+    return true;
 }
 
 //MoveBall
@@ -284,6 +291,7 @@ void CPlayer::MoveBall()
     	int paddle_location = ball_center - paddle_center;
     	iBall_Speed_X = paddle_location / 5;
     	iBall_Speed_Y *= -1;
+    	pSoundPlayer->Play();
     }
     if(Collision(Computer,Ball) == true)
     {
@@ -292,6 +300,7 @@ void CPlayer::MoveBall()
     	int paddle_location = ball_center - paddle_center;
     	iBall_Speed_X = paddle_location / 5;
     	iBall_Speed_Y *= -1;
+    	pSoundCpu->Play();
     }
 
 	pBall->SetPos(Ball.x,Ball.y);
