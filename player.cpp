@@ -107,6 +107,8 @@ void CPlayer::Render()
 //Bewegungen der Spieler
 void CPlayer::Control()
 {
+    screen = pFramework->GetScreen();
+
     static bool left_pressed_p1  = false;
 	static bool right_pressed_p1 = false;
     static bool left_pressed_p2  = false;
@@ -123,6 +125,7 @@ void CPlayer::Control()
 		{
 			if (g_Event.key.keysym.sym == SDLK_ESCAPE)
 			{
+                SDL_WM_ToggleFullScreen(screen);
                 pFramework->done = true;
 				return;
 			}

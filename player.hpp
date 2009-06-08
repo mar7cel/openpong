@@ -48,8 +48,8 @@ class CPlayer
                 CSprite *pBall;         //Ball Bild
                 CSprite *pBack;         //Hintergrundbild
                 CSound *pSoundPlayer;   //Sound für den Player
-                CSound *pSoundCpu;
-
+                CSound *pSoundCpu;      //Sound für den Computer
+                SDL_Surface *screen;//Bildschirm auf den Gerendert wird
                 SDL_Rect Player;        //Rect des Players
                 SDL_Rect Computer;      //Rect des Players
                 SDL_Rect Ball;          //Rect des Balles
