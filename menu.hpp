@@ -20,6 +20,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include "framework.hpp"
 #include "sprite.hpp"
 
+#define pos0 250
 #define pos1 300
 #define pos2 350
 #define pos3 400
@@ -36,6 +37,7 @@ class CMenu     :   public OSingleton<CMenu>
                 void Render();      //Rendert das Menü
                 void Control();     //Steuerung für das Menü
                 void MainMenu();    //Hauptmenü
+                void Option();      //Optionen für das Spiel
                 void Exit();        //Exit Menü
                 bool start;         //Start
                 bool fullscreen;    //Fullscreen
