@@ -22,7 +22,9 @@ CPlayer::CPlayer()
     pComputer = NULL;
     pBall = NULL;
     pBack = NULL;
-    iPlayer = NULL;
+    pSoundPlayer = NULL;
+    pSoundCpu = NULL;
+    iPlayer = 0;
     host = false;
     guest = false;
     iPlayerPoint = 0;

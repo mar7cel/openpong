@@ -31,8 +31,9 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="bin/Release/libs/libSDL_net-1.2.so" />
-					<Add library="bin/Release/libs/libSDL_ttf-2.0.so" />
+					<Add library="libs/libSDL_net-1.2.so" />
+					<Add library="libs/libSDL_ttf-2.0.so" />
+					<Add library="libs/libSDL_mixer.so" />
 				</Linker>
 			</Target>
 		</Build>
