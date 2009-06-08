@@ -17,7 +17,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include"game.hpp"
 
 CGame game;
-SDL_Surface *screen;//Bildschirm auf den Gerendert wird
+
 int main ( int argc, char** argv )
 {
     game.Init();    //Spiel Initialisieren
@@ -27,12 +27,6 @@ int main ( int argc, char** argv )
         {
            game.Play();     //Spiel laufen lassen
         }
-
-    if(pMenu->fullscreen == true)
-    {
-        screen = pFramework->GetScreen();
-        SDL_WM_ToggleFullScreen(screen);
-    }
 
     printf("all ok\n");
     printf("cu\n");

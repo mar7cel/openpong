@@ -125,7 +125,10 @@ void CPlayer::Control()
 		{
 			if (g_Event.key.keysym.sym == SDLK_ESCAPE)
 			{
-                SDL_WM_ToggleFullScreen(screen);
+			    if(pMenu->fullscreen == true)
+			    {
+			        SDL_WM_ToggleFullScreen(screen);
+			    }
                 pFramework->done = true;
 				return;
 			}

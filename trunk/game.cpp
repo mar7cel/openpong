@@ -44,19 +44,19 @@ void CGame::Init()
     //Timer für das Spiel
     iTimer = SDL_GetTicks();
     //Menu Initialisieren
-    m_Menu.Init();
-    m_Menu.fullscreen = fullscreen;
+    pMenu->Init();
+    pMenu->fullscreen = fullscreen;
 }//Init ende
 
 //Menu
 //Aufgabe:Menu des Spieles
 void CGame::Menu()
 {
-    while(!m_Menu.start)
+    while(!pMenu->start)
         {
             pFramework->Clear();
-            m_Menu.Render();
-            m_Menu.Control();
+            pMenu->Render();
+            pMenu->Control();
             pFramework->Flip();
         }
     m_Player.Init();
