@@ -38,11 +38,14 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="`sdl-config --cflags`" />
 			<Add option="-Wall" />
+			<Add option="`sdl-config --cflags`" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl-config --libs`" />
+			<Add library="libs/libSDL_mixer.so" />
+			<Add library="libs/libSDL_net-1.2.so" />
+			<Add library="libs/libSDL_ttf-2.0.so" />
 		</Linker>
 		<Unit filename="client.cpp" />
 		<Unit filename="client.hpp" />

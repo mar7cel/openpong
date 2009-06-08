@@ -39,6 +39,7 @@ CPlayer::~CPlayer()
     delete (pBack);
     delete (pSoundPlayer);
     delete (pSoundCpu);
+    delete (screen);
 }
 
 //Init

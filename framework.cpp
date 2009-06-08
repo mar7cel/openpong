@@ -68,6 +68,8 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
 //  Aufgabe:SDL beenden
 void CFramework::Quit()
 {
+    delete (pScreen);
+    TTF_CloseFont(pFont);
     SDL_Quit ();
     SDLNet_Quit();
 } // Quti Ende
@@ -96,7 +98,6 @@ void CFramework::LoadFont(const string sFilename, int size)
     {
         cout << " Fehler beim Laden des Font's " << endl;
         cout << " Fehlermeldung : " << SDL_GetError() << endl;
-
         pFramework->Quit();
         exit(1);
     }
