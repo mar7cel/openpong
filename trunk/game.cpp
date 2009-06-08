@@ -26,7 +26,7 @@ CGame::CGame()
 //Aufgabe:Destruktor
 CGame::~CGame()
 {
-
+    delete (screen);
 }//~CGame ende
 
 // Init

@@ -35,6 +35,7 @@ CMenu::~CMenu()
 {
     delete(pBack);
     delete(pCursor);
+    delete(screen);
 }
 
 //Init

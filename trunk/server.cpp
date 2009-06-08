@@ -23,6 +23,7 @@ CServer::CServer()
 }
 CServer::~CServer()
 {
+    delete (remoteIP);
     SDLNet_TCP_Close(server);
 	SDLNet_Quit();
 }
