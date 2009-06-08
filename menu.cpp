@@ -197,6 +197,7 @@ void CMenu::Control()
                         screen = pFramework->GetScreen();
                         SDL_WM_ToggleFullScreen(screen);
                     }
+                fullscreen = false;
                 start = true;
                 pFramework->done = true;
 			}

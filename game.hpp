@@ -29,7 +29,6 @@ class CGame
                 void Menu();        //Menu Initialisieren
                 void Play();        //Spielen
                 CPlayer m_Player;   //Instanz vom Spieler erzeugen
-                CMenu m_Menu;       //Instanz vom Menü erzeugen
                 int iTimer;         //Ein Timer
     private :
                 bool fullscreen;    //FullScreen ?
