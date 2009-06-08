@@ -67,6 +67,11 @@ void CMenu::Render()
         Exit();
         lastpos = pos2;
     }
+    else if(option == true)
+    {
+        Option();
+        lastpos = pos2;
+    }
 }//Ende Render
 
 //MainMenu
@@ -78,7 +83,7 @@ void CMenu::MainMenu()
     pFramework->Text("Simple game with SDL | SDL_TTF | SDL_NET", 225,80);
     pFramework->Text("Singelplayer", 350,pos1);
     pFramework->Text("Multiplayer geht noch nicht", 350,pos2);
-    pFramework->Text("Optionen gibt es noch keine", 350,pos3);
+    pFramework->Text("Optionen", 350,pos3);
     pFramework->Text("Exit", 350,pos4);
 
     pCursor->SetPos(300,yCursor);
@@ -92,8 +97,49 @@ void CMenu::MainMenu()
         exit = true;
         main = false;
     }
+    if ((yCursor == pos3) && (aktiv == true))
+    {
+        option = true;
+        main = false;
+    }
     aktiv = false;
 }//Ende MainMenu
+
+//Optionen
+//Aufgabe:Einstellungen für das Spiel vornehmen
+void CMenu::Option()
+{
+    screen = pFramework->GetScreen();
+
+    firstpos = pos0;
+
+    if(yCursor > lastpos)
+    yCursor = pos0;
+
+    pFramework->Text("Optionen", 370,80);
+    pFramework->Text("FullScreen", 250,pos0);
+    pFramework->Text("Ja", 500,pos0);
+    pFramework->Text("Nein", 500,pos1);
+    pFramework->Text("Zurueck", 500,pos2);
+
+    pCursor->SetPos(450,yCursor);
+
+    if ((yCursor == pos0) && (aktiv == true) && (fullscreen == false))
+    {
+        SDL_WM_ToggleFullScreen(screen);
+        fullscreen = true;
+    }
+    if ((yCursor == pos1) && (aktiv == true) && (fullscreen == true))
+    {
+        SDL_WM_ToggleFullScreen(screen);
+        fullscreen = false;
+    }
+    if ((yCursor == pos2) && (aktiv == true))
+    {
+        main = true;
+        option = false;
+    }
+}
 
 //Exit
 //Aufgabe:Erstellt das Exit Menü
@@ -215,7 +261,7 @@ void CMenu::Control()
 	{
       	case SDL_KEYDOWN:
               string s = SDL_GetKeyName(g_Event.key.keysym.sym);
-              cout << "Taste : " << s << endl;
+              cout << "Taste : " << s+s << endl;
     break;
 	}*/
 }//Ende Control
