@@ -79,7 +79,7 @@ void CPlayer::Init()
         pBack->SetPos(0,0);
 
         iBall_Speed_X = 0;
-        iBall_Speed_Y = 10;
+        iBall_Speed_Y = 13;
 
         if (host == true)
         {
@@ -322,11 +322,11 @@ void CPlayer::Reset()
     }
     if (Ball.y > WHEIGHT)
     {
-        iBall_Speed_Y = 10;
+        iBall_Speed_Y = 13;
     }
     if (Ball.y < 0)
     {
-        iBall_Speed_Y = -10;
+        iBall_Speed_Y = -13;
     }
 }
 
