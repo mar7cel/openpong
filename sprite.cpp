@@ -24,10 +24,10 @@ CSprite::CSprite ()
 
 CSprite::~CSprite ()
 {
-    if(pImage)
+    if (pImage)
     {
-    SDL_FreeSurface(pImage);
-    pImage = NULL;
+        SDL_FreeSurface(pImage);
+        pImage = NULL;
     }
 }
 
@@ -65,7 +65,7 @@ void CSprite::SetPos(int iPosX, int iPosY)
 void CSprite::Render ()
 {
     if (SDL_BlitSurface(pImage, NULL, pScreen, &m_Rect) < 0)
-    fprintf(stderr, "Error :  %s\n",SDL_GetError());
+        fprintf(stderr, "Error :  %s\n",SDL_GetError());
 }//Ende Render
 
 //SetColorKey
@@ -73,5 +73,5 @@ void CSprite::Render ()
 void CSprite::SetColorKey(int R, int G, int B)
 {
     SDL_SetColorKey(pImage, SDL_SRCCOLORKEY,
-                SDL_MapRGB(pImage->format, R, G, B));
+                    SDL_MapRGB(pImage->format, R, G, B));
 }//Ende Colorkey

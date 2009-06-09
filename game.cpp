@@ -26,7 +26,7 @@ CGame::CGame()
 //Aufgabe:Destruktor
 CGame::~CGame()
 {
-    delete (screen);
+
 }//~CGame ende
 
 // Init
@@ -36,8 +36,8 @@ void CGame::Init()
     //Initialisiert das Spiel
     if (pFramework->Init(WWIDTH,WHEIGHT,WDEPTH, fullscreen) == false)
     {
-    cout << "Spiel konnte nicht Gestartet werden !!" << endl;
-    pFramework->Quit();
+        cout << "Spiel konnte nicht Gestartet werden !!" << endl;
+        pFramework->Quit();
     }
     //Setzt die Fenster Beschriftung
     SDL_WM_SetCaption(WCAPTION, 0);
@@ -52,13 +52,13 @@ void CGame::Init()
 //Aufgabe:Menu des Spieles
 void CGame::Menu()
 {
-    while(!pMenu->start)
-        {
-            pFramework->Clear();
-            pMenu->Render();
-            pMenu->Control();
-            pFramework->Flip();
-        }
+    while (!pMenu->start)
+    {
+        pFramework->Clear();
+        pMenu->Render();
+        pMenu->Control();
+        pFramework->Flip();
+    }
     m_Player.Init();
     m_Player.iPlayer = 2;
 }//Menu ende

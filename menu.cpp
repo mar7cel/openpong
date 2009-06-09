@@ -35,7 +35,6 @@ CMenu::~CMenu()
 {
     delete(pBack);
     delete(pCursor);
-    delete(screen);
 }
 
 //Init
@@ -58,29 +57,30 @@ void CMenu::Render()
 {
     pBack->Render();
     pCursor->Render();
-    if(main == true)
+    if (main == true)
     {
         MainMenu();
         lastpos = pos4;
     }
-    else if(exit == true)
+    else if (exit == true)
     {
         Exit();
         lastpos = pos2;
     }
-    else if(option == true)
+    else if (option == true)
     {
         Option();
         lastpos = pos2;
     }
+    SDL_Delay(5);
 }//Ende Render
 
 //MainMenu
 //Aufgabe:Erstellt das Hauptmenü
 void CMenu::MainMenu()
 {
-    if(yCursor > lastpos)
-    yCursor = pos1;
+    if (yCursor > lastpos)
+        yCursor = pos1;
     pFramework->Text("Simple game with SDL | SDL_TTF | SDL_NET", 225,80);
     pFramework->Text("Singelplayer", 350,pos1);
     pFramework->Text("Multiplayer geht noch nicht", 350,pos2);
@@ -110,12 +110,12 @@ void CMenu::MainMenu()
 //Aufgabe:Einstellungen für das Spiel vornehmen
 void CMenu::Option()
 {
-    screen = pFramework->GetScreen();
+    pScreen = pFramework->GetScreen();
 
     firstpos = pos0;
 
-    if(yCursor > lastpos)
-    yCursor = pos0;
+    if (yCursor > lastpos)
+        yCursor = pos0;
 
     pFramework->Text("Optionen", 370,80);
     pFramework->Text("FullScreen", 250,pos0);
@@ -127,12 +127,12 @@ void CMenu::Option()
 
     if ((yCursor == pos0) && (aktiv == true) && (fullscreen == false))
     {
-        SDL_WM_ToggleFullScreen(screen);
+        SDL_WM_ToggleFullScreen(pScreen);
         fullscreen = true;
     }
     if ((yCursor == pos1) && (aktiv == true) && (fullscreen == true))
     {
-        SDL_WM_ToggleFullScreen(screen);
+        SDL_WM_ToggleFullScreen(pScreen);
         fullscreen = false;
     }
     if ((yCursor == pos2) && (aktiv == true))
@@ -146,8 +146,8 @@ void CMenu::Option()
 //Aufgabe:Erstellt das Exit Menü
 void CMenu::Exit()
 {
-    if(yCursor > lastpos)
-    yCursor = pos1;
+    if (yCursor > lastpos)
+        yCursor = pos1;
     pFramework->Text("Wirklich beenden ??", 225,80);
     pFramework->Text("Ja", 350,pos1);
     pFramework->Text("Nein", 350,pos2);
@@ -159,8 +159,8 @@ void CMenu::Exit()
         start = true;
         if (fullscreen == true)
         {
-            screen = pFramework->GetScreen();
-            SDL_WM_ToggleFullScreen(screen);
+            pScreen = pFramework->GetScreen();
+            SDL_WM_ToggleFullScreen(pScreen);
         }
         pFramework->done = true;
     }
@@ -177,94 +177,94 @@ void CMenu::Exit()
 void CMenu::Control()
 {
     static bool up_pressed  = false;
-	static bool down_pressed = false;
-	static bool return_pressed = false;
+    static bool down_pressed = false;
+    static bool return_pressed = false;
 
 
-	if ( SDL_PollEvent(&g_Event) )
-	{
-		if (g_Event.type == SDL_QUIT)
-		{
+    if ( SDL_PollEvent(&g_Event) )
+    {
+        if (g_Event.type == SDL_QUIT)
+        {
             start = true;
             pFramework->done = true;
-		}
+        }
 
-		if (g_Event.type == SDL_KEYDOWN)
-		{
-			if (g_Event.key.keysym.sym == SDLK_ESCAPE)
-			{
+        if (g_Event.type == SDL_KEYDOWN)
+        {
+            if (g_Event.key.keysym.sym == SDLK_ESCAPE)
+            {
                 if (fullscreen == true)
-                    {
-                        screen = pFramework->GetScreen();
-                        SDL_WM_ToggleFullScreen(screen);
-                    }
+                {
+                    pScreen = pFramework->GetScreen();
+                    SDL_WM_ToggleFullScreen(pScreen);
+                }
                 fullscreen = false;
                 start = true;
                 pFramework->done = true;
-			}
-			if (g_Event.key.keysym.sym == SDLK_UP)
-			{
-				up_pressed = true;
-			}
-			if (g_Event.key.keysym.sym == SDLK_DOWN)
-			{
-				down_pressed = true;
-			}
-			if (g_Event.key.keysym.sym == SDLK_RETURN)
-			{
-				return_pressed = true;
-				aktiv = true;
-
-			}
-		}
-		if (g_Event.type == SDL_KEYUP)
-		{
-			if (g_Event.key.keysym.sym == SDLK_UP)
-			{
-				up_pressed = false;
-			}
-			if (g_Event.key.keysym.sym == SDLK_DOWN)
-			{
-				down_pressed = false;
-			}
+            }
+            if (g_Event.key.keysym.sym == SDLK_UP)
+            {
+                up_pressed = true;
+            }
+            if (g_Event.key.keysym.sym == SDLK_DOWN)
+            {
+                down_pressed = true;
+            }
             if (g_Event.key.keysym.sym == SDLK_RETURN)
-			{
-				return_pressed = false;
+            {
+                return_pressed = true;
+                aktiv = true;
+
+            }
+        }
+        if (g_Event.type == SDL_KEYUP)
+        {
+            if (g_Event.key.keysym.sym == SDLK_UP)
+            {
+                up_pressed = false;
+            }
+            if (g_Event.key.keysym.sym == SDLK_DOWN)
+            {
+                down_pressed = false;
+            }
+            if (g_Event.key.keysym.sym == SDLK_RETURN)
+            {
+                return_pressed = false;
                 aktiv = false;
-			}
-		}
+            }
+        }
 
-	}
+    }
 
-	if (up_pressed)
-	{
+    if (up_pressed)
+    {
         yCursor -= 50;
         if (yCursor < firstpos)
         {
             yCursor = firstpos;
         }
         up_pressed = false;
-	}
-	if (down_pressed)
-	{
+    }
+    if (down_pressed)
+    {
         yCursor += 50;
-        if(yCursor > lastpos)
+        if (yCursor > lastpos)
         {
             yCursor = lastpos;
         }
         down_pressed = false;
 
-	}
-	if (return_pressed)
-	{
+    }
+    if (return_pressed)
+    {
         return_pressed = false;
-	}
-	/*switch (g_Event.type)
-	{
+    }
+    /*switch (g_Event.type)
+    {
       	case SDL_KEYDOWN:
               string s = SDL_GetKeyName(g_Event.key.keysym.sym);
               cout << "Taste : " << s+s << endl;
     break;
-	}*/
+    }*/
 }//Ende Control
 

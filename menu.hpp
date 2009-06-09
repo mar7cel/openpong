@@ -46,7 +46,7 @@ class CMenu     :   public OSingleton<CMenu>
                 CSprite *pBack;     //Hintergrundbild
                 CSprite *pCursor;   //Cursorbild
                 SDL_Event g_Event;  //SDL Event
-                SDL_Surface *screen;//Bildschirm auf den Gerendert wird
+                SDL_Surface *pScreen;//Bildschirm auf den Gerendert wird
                 int yCursor;        // Cursor Y Position
                 int firstpos;       // Erste Position im Menü
                 int lastpos;        // Letzte Position im Menü

@@ -23,11 +23,11 @@ int main ( int argc, char** argv )
     game.Init();    //Spiel Initialisieren
     game.Menu();    //Menu Starten
     //Solgange wie done == False ist läuft die Schleife
-       while (!pFramework->done)
-        {
-           game.Play();     //Spiel laufen lassen
-        }
-
+    while (!pFramework->done)
+    {
+        game.Play();     //Spiel laufen lassen
+    }
+    pFramework->Quit();
     printf("all ok\n");
     printf("cu\n");
     return 0;

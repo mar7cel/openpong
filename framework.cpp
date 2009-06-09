@@ -19,10 +19,10 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 //  Init
 //  Aufgabe:Framework Initialisieren
 bool CFramework::Init(int iScreenWidth, int iScreenHeight,
-                        int iColorDepth, bool bFullScreen)
+                      int iColorDepth, bool bFullScreen)
 {
     //Systeme der SDL Initialisieren
-    if(SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) == -1)
+    if (SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) == -1)
     {
         cout << "SDL konnte nicht Initialisiert werden!" << endl;
         cout << "Fehlermeldung: " << SDL_GetError() << endl;
@@ -31,7 +31,7 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
 
         return(false);
     }
-    if(bFullScreen == true)
+    if (bFullScreen == true)
     {
         pScreen = SDL_SetVideoMode (iScreenWidth, iScreenHeight, iColorDepth,
                                     SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
@@ -41,7 +41,7 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
         pScreen = SDL_SetVideoMode (iScreenWidth, iScreenHeight, iColorDepth,
                                     SDL_HWSURFACE | SDL_DOUBLEBUF);
     }
-    if(pScreen == NULL)
+    if (pScreen == NULL)
     {
         cout << "Videomodus konnte nicht gesetzt werden!" << endl;
         cout << "Fehlermeldung: " << SDL_GetError() << endl;
@@ -50,15 +50,15 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
 
         return (false);
     }
-    if(SDLNet_Init()==-1)
+    if (SDLNet_Init()==-1)
     {
-    printf("SDLNet_Init: %s\n", SDLNet_GetError());
-    exit(2);
+        printf("SDLNet_Init: %s\n", SDLNet_GetError());
+        exit(2);
     }
-    if(TTF_Init()==-1)
+    if (TTF_Init()==-1)
     {
-    printf("TTF_Init: %s\n", TTF_GetError());
-    exit(2);
+        printf("TTF_Init: %s\n", TTF_GetError());
+        exit(2);
     }
     LoadFont("gfx/font/font.ttf",15);
     return (true);
@@ -68,11 +68,10 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
 //  Aufgabe:SDL beenden
 void CFramework::Quit()
 {
-    delete (pScreen);
     TTF_CloseFont(pFont);
-    SDL_Quit ();
     SDLNet_Quit();
-} // Quti Ende
+    SDL_Quit ();
+} // Quit Ende
 
 // Clear
 // Aufgabe:Buffer Löschen
@@ -98,6 +97,7 @@ void CFramework::LoadFont(const string sFilename, int size)
     {
         cout << " Fehler beim Laden des Font's " << endl;
         cout << " Fehlermeldung : " << SDL_GetError() << endl;
+        TTF_CloseFont(pFont);
         pFramework->Quit();
         exit(1);
     }
@@ -109,13 +109,14 @@ void CFramework::Text(string text, int iPosX, int iPosY)
 {
     SDL_Color foreground  = {0,255,0};
     SDL_Color background  = {0,0,0};
-    SDL_Surface* temp = TTF_RenderText_Shaded(pFont, text.c_str(), foreground, background);
+    temp = TTF_RenderText_Shaded(pFont, text.c_str(), foreground, background);
 
     SDL_Rect destination = {iPosX, iPosY, 0, 0};
 
     pScreen = pFramework->GetScreen();
-	SDL_BlitSurface(temp, NULL, pScreen, &destination);
+    SDL_BlitSurface(temp, NULL, pScreen, &destination);
 
-	SDL_FreeSurface(temp);
+    SDL_FreeSurface(temp);
+
 }//Ende Text
 

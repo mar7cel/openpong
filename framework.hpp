@@ -59,6 +59,7 @@ class CFramework    :   public OSingleton<CFramework>
     private :
                 SDL_Surface *pScreen;                               //Surface für den Screen
                 TTF_Font *pFont;                                    //Font
+                SDL_Surface* temp;
 };
 
 #endif // FRAMEWORK_HPP_INCLUDED
