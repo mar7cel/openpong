@@ -23,7 +23,7 @@ CClient::CClient()
 CClient::~CClient()
 {
     SDLNet_TCP_Close(server);
-	SDLNet_Quit();
+    SDLNet_Quit();
 }
 
 void CClient::OpenClient()
@@ -32,22 +32,22 @@ void CClient::OpenClient()
 //    cout << "Bitte ip des Servers Eingeben : "<< endl;
 //    cin >> s;
 
-   if (SDLNet_ResolveHost (&addr, "192.168.2.1", 6699) < 0)
-     {
-       printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
-       SDLNet_Quit ();
-       exit (-1);
-     }
+    if (SDLNet_ResolveHost (&addr, "192.168.2.1", 6699) < 0)
+    {
+        printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
+        SDLNet_Quit ();
+        exit (-1);
+    }
 
-   client = SDLNet_TCP_Open (&addr);
+    client = SDLNet_TCP_Open (&addr);
 
-   if (client == NULL)
-     {
-       printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
-       SDLNet_Quit ();
-       exit (-1);
-     }
- }
+    if (client == NULL)
+    {
+        printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
+        SDLNet_Quit ();
+        exit (-1);
+    }
+}
 
 int CClient::Recive()
 {

@@ -49,7 +49,7 @@ class CPlayer
                 CSprite *pBack;         //Hintergrundbild
                 CSound *pSoundPlayer;   //Sound für den Player
                 CSound *pSoundCpu;      //Sound für den Computer
-                SDL_Surface *screen;//Bildschirm auf den Gerendert wird
+                SDL_Surface *pScreen;//Bildschirm auf den Gerendert wird
                 SDL_Rect Player;        //Rect des Players
                 SDL_Rect Computer;      //Rect des Players
                 SDL_Rect Ball;          //Rect des Balles
@@ -57,5 +57,10 @@ class CPlayer
                 SDL_Event g_Event;      //SDL Event
                 int iPlayerPoint;       //Spieler Punkte
                 int iCpuPoint;          //Spieler Punkte
+                int paddle_center;
+                int ball_center;
+                int paddle_location;
+                int paddle_center_cpu;
+                int paddle_location_cpu;
 };
 #endif // PLAYER_HPP_INCLUDED

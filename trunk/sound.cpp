@@ -47,7 +47,7 @@ void CSound::LoadSound(const string sFilename)
 void CSound::Play()
 {
     Mix_PlayMusic(music, 0);
-    if(Mix_PlayMusic(music, 0) == -1)
+    if (Mix_PlayMusic(music, 0) == -1)
     {
         cout << "Kann Musik nicht Abspielen : "  << endl;
         cout << "Fehlermeldung : " << Mix_GetError() << endl;
