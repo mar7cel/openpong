@@ -57,10 +57,10 @@ class CPlayer
                 SDL_Event g_Event;      //SDL Event
                 int iPlayerPoint;       //Spieler Punkte
                 int iCpuPoint;          //Spieler Punkte
-                int paddle_center;
-                int ball_center;
-                int paddle_location;
-                int paddle_center_cpu;
-                int paddle_location_cpu;
+                int paddle_center;      //Spieler Schläger mitte
+                int ball_center;        //Ball mitte
+                int paddle_location;    //Wo trifft der Ball auf den Schläger
+                int paddle_center_cpu;  //CPU Schläger mitte
+                int paddle_location_cpu;//Wo trifft der Ball auf den CPU Schläger
 };
 #endif // PLAYER_HPP_INCLUDED
