@@ -39,6 +39,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #define RANDY 30
 #define RANDX 20
 #define SPEEDPLAYER 10
+#define SAFE_DELETE(X) {if (X != NULL) {delete (X),X = NULL;}}
 
 using namespace std;
 

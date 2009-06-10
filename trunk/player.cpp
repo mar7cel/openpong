@@ -29,16 +29,23 @@ CPlayer::CPlayer()
     guest = false;
     iPlayerPoint = 0;
     iCpuPoint = 0;
+    iBall_Speed_X = 0;
+    iBall_Speed_Y = 13;
+    paddle_center = 0;
+    ball_center = 0;
+    paddle_location = 0;
+    paddle_center_cpu = 0;
+    paddle_location_cpu = 0;
 }
 
 CPlayer::~CPlayer()
 {
-    delete (pPlayer);
-    delete (pComputer);
-    delete (pBall);
-    delete (pBack);
-    delete (pSoundPlayer);
-    delete (pSoundCpu);
+    SAFE_DELETE (pPlayer);
+    SAFE_DELETE (pComputer);
+    SAFE_DELETE (pBall);
+    SAFE_DELETE (pBack);
+    SAFE_DELETE (pSoundPlayer);
+    SAFE_DELETE (pSoundCpu)
 }
 
 //Init
@@ -79,9 +86,6 @@ void CPlayer::Init()
 
     pBack->Load("gfx/game/back.bmp");
     pBack->SetPos(0,0);
-
-    iBall_Speed_X = 0;
-    iBall_Speed_Y = 13;
 
     if (host == true)
     {
@@ -265,13 +269,13 @@ void CPlayer::MoveBall()
 
     if (Ball.y > WHEIGHT)
     {
-        Reset();
         iPlayerPoint++;
+        Reset();
     }
     if (Ball.y < 0)
     {
-        Reset();
         iCpuPoint++;
+        Reset();
     }
 
     /*if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Player.x + 20) && Collision(Player,Ball) == true)

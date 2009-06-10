@@ -20,13 +20,15 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 CGame::CGame()
 {
     fullscreen = false;
+    iTimer = 0;
 }//CGame ende
 
 //~CGame
 //Aufgabe:Destruktor
 CGame::~CGame()
 {
-
+    pFramework->Quit();
+    pMenu->Quit();
 }//~CGame ende
 
 // Init
@@ -68,12 +70,12 @@ void CGame::Menu()
 void CGame::Play()
 {
     if ( (SDL_GetTicks() - iTimer) >= FRAME_RATE )
-    {
+        {
         pFramework->Clear();
         m_Player.Render();
         m_Player.Control();
         m_Player.MoveBall();
         iTimer = SDL_GetTicks();
         pFramework->Flip();
-    }
+        }
 }//Play ende

@@ -61,6 +61,7 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
         exit(2);
     }
     LoadFont("gfx/font/font.ttf",15);
+    done = false;
     return (true);
 } // Init Ende
 
