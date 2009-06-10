@@ -21,6 +21,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include <SDL_net.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+#include <assert.h>
 
 #include <iostream>
 #include <time.h>

@@ -110,10 +110,12 @@ void CFramework::Text(string text, int iPosX, int iPosY)
 {
     SDL_Color foreground  = {0,255,0};
     SDL_Color background  = {0,0,0};
+
     temp = TTF_RenderText_Shaded(pFont, text.c_str(), foreground, background);
 
     SDL_Rect destination = {iPosX, iPosY, 0, 0};
 
+    assert(pScreen);
     pScreen = pFramework->GetScreen();
     SDL_BlitSurface(temp, NULL, pScreen, &destination);
 

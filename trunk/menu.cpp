@@ -44,9 +44,11 @@ void CMenu::Init()
     pBack = new CSprite;
     pCursor = new CSprite;
 
+    assert(pBack);
     pBack->Load("gfx/gui/back.bmp");
     pBack->SetPos(0,0);
 
+    assert (pCursor);
     pCursor->Load("gfx/game/ball.bmp");
     pCursor->SetColorKey(255,0,255);
 }//Ende Init
@@ -274,4 +276,3 @@ void CMenu::Quit()
     SAFE_DELETE (pBack);
     SAFE_DELETE (pCursor);
 }
-
