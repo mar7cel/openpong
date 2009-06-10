@@ -59,10 +59,12 @@ void CPlayer::Init()
     pSoundPlayer = new CSound;
     pSoundCpu = new CSound;
 
+    assert(pSoundPlayer);
     pSoundPlayer->LoadSound("sound/pong1.wav");
+    assert(pSoundCpu);
     pSoundCpu->LoadSound("sound/pong2.wav");
 
-
+    assert(pPlayer);
     pPlayer->Load("gfx/game/player.bmp");
     pPlayer->SetColorKey(255,0,255);
     Player = pPlayer->GetRect();
@@ -70,6 +72,7 @@ void CPlayer::Init()
     Player.y = RANDY;
     pPlayer->SetPos(Player.x,Player.y);
 
+    assert(pComputer);
     pComputer->Load("gfx/game/player.bmp");
     pComputer->SetColorKey(255,0,255);
     Computer = pComputer->GetRect();
@@ -77,6 +80,7 @@ void CPlayer::Init()
     Computer.y = (WHEIGHT-PHEIGHT-RANDY);
     pComputer->SetPos(Computer.x,Computer.y);
 
+    assert(pBall);
     pBall->Load("gfx/game/ball.bmp");
     pBall->SetColorKey(255,0,255);
     Ball = pBall->GetRect();
@@ -84,6 +88,7 @@ void CPlayer::Init()
     Ball.y = (WHEIGHT/2-BALLWH/2);
     pBall->SetPos(Ball.x,Ball.y);
 
+    assert(pBack);
     pBack->Load("gfx/game/back.bmp");
     pBack->SetPos(0,0);
 

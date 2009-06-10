@@ -32,7 +32,6 @@ class CGame
                 int iTimer;         //Ein Timer
     private :
                 bool fullscreen;    //FullScreen ?
-                SDL_Surface *pScreen;//Surface des Screens*
 };
 
 
