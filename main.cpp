@@ -27,7 +27,6 @@ int main ( int argc, char** argv )
     {
         game.Play();     //Spiel laufen lassen
     }
-    pFramework->Quit();
     printf("all ok\n");
     printf("cu\n");
     return 0;

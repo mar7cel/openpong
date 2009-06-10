@@ -29,12 +29,12 @@ CMenu::CMenu()
     fullscreen = false;
     yCursor = 300;
     firstpos = pos1;
-
+    lastpos = 0;
 }
 CMenu::~CMenu()
 {
-    delete(pBack);
-    delete(pCursor);
+    SAFE_DELETE (pBack);
+    SAFE_DELETE (pCursor);
 }
 
 //Init
@@ -92,6 +92,7 @@ void CMenu::MainMenu()
     if ((yCursor == pos1) && (aktiv == true))
     {
         start = true;
+        Quit();
     }
     if ((yCursor == pos4) && (aktiv == true))
     {
@@ -267,4 +268,10 @@ void CMenu::Control()
     break;
     }*/
 }//Ende Control
+
+void CMenu::Quit()
+{
+    SAFE_DELETE (pBack);
+    SAFE_DELETE (pCursor);
+}
 
