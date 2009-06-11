@@ -35,6 +35,7 @@ class CPlayer
                 void MoveBall();        //Bewegt den Ball
                 void Reset();           //Resetet das Spiel
                 void Points();          //Berechnet Punkte der Spieler und gibt Sie aus
+                void AI();              //Computer Gegner
                 short int iPlayer;      //Anzahl der Spieler
                 int iBall_Speed_X;      //X Geschwindigkeit des Balles
                 int iBall_Speed_Y;      //Y Geschwindigkeit des Balles
@@ -62,5 +63,6 @@ class CPlayer
                 int paddle_location;    //Wo trifft der Ball auf den Schläger
                 int paddle_center_cpu;  //CPU Schläger mitte
                 int paddle_location_cpu;//Wo trifft der Ball auf den CPU Schläger
+                bool b_decision;
 };
 #endif // PLAYER_HPP_INCLUDED

@@ -77,6 +77,10 @@ void CGame::Play()
         pFramework->Clear();
         m_Player.Render();
         m_Player.Control();
+        if(pMenu-> AI == true)
+        {
+            m_Player.AI();
+        }
         m_Player.MoveBall();
         iTimer = SDL_GetTicks();
         pFramework->Flip();

@@ -17,10 +17,10 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #ifndef FRAMEWORK_HPP_INCLUDED
 #define FRAMEWORK_HPP_INCLUDED
 
-#include <SDL.h>
-#include <SDL_net.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_net.h>
+#include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 #include <assert.h>
 
 #include <iostream>

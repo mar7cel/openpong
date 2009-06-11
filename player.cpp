@@ -36,6 +36,7 @@ CPlayer::CPlayer()
     paddle_location = 0;
     paddle_center_cpu = 0;
     paddle_location_cpu = 0;
+    b_decision = false;
 }
 
 CPlayer::~CPlayer()
@@ -323,8 +324,10 @@ void CPlayer::MoveBall()
     }
 
     pBall->SetPos(Ball.x,Ball.y);
-}
+}//Ende Bewegen
 
+//Reset
+//Aufgabe:Reseten des Balles
 void CPlayer::Reset()
 {
     if (iPlayerPoint > 9 || iCpuPoint > 9)
@@ -347,10 +350,10 @@ void CPlayer::Reset()
     {
         iBall_Speed_Y = -13;
     }
-}
+}//Ende Reset
 
-
-
+//Points
+//Aufgabe:Punkte Berechnen und Ausgeben
 void CPlayer::Points()
 {
     ostringstream p;
@@ -370,6 +373,10 @@ void CPlayer::Points()
         pFramework->Text("Host : "+pla, 10,10);
         pFramework->Text("Client : "+cpu, 10,570);
     }
+    if (pMenu->AI == true)
+    {
+        pFramework->Text("Computer : "+cpu, 10,570);
+    }
     if (iPlayerPoint > 9)
     {
         pFramework->Text("Player 1 hat Gewonnen! ", 10,10);
@@ -377,6 +384,69 @@ void CPlayer::Points()
     else if (iCpuPoint > 9)
     {
         pFramework->Text("Player 2 hat Gewonnen! ", 10,570);
+
+        if(pMenu->AI == true)
+        {
+             pFramework->Text("Computer hat Gewonnen! ", 10,570);
+        }
     }
 
+}//Ende Points
+
+//AI
+//Aufgabe:Steuern des Computer Gegners
+void CPlayer::AI()
+{
+
+    paddle_center_cpu = Computer.x + Computer.w / 2;
+    static int decision;
+    static int last_speed = iBall_Speed_Y;
+
+    if (last_speed != iBall_Speed_Y)
+	{
+		decision = rand() % 2 + 1;
+
+		last_speed = iBall_Speed_Y;
+	}
+
+	switch (decision)
+	{
+		case 1:
+		{
+			b_decision = true;
+
+		} break;
+
+		case 2:
+		{
+			b_decision = false;
+
+		} break;
+	}
+
+    if((Ball.x+10 > paddle_center_cpu) && iBall_Speed_Y > 0)
+    {
+        Computer.x += SPEEDPLAYER;
+    }
+    else if(iBall_Speed_Y < 0 && paddle_center_cpu < WWIDTH/2 && b_decision == true)
+    {
+        Computer.x += SPEEDPLAYER;
+    }
+    if((Ball.x+10 < paddle_center_cpu) && iBall_Speed_Y > 0)
+    {
+        Computer.x -= SPEEDPLAYER;
+    }
+    else if(iBall_Speed_Y < 0 && paddle_center_cpu > WWIDTH/2 && b_decision == true)
+    {
+        Computer.x -= SPEEDPLAYER;
+    }
+
+    pComputer->SetPos(Computer.x,Computer.y);
+
+    if (Computer.x < RANDX)
+        Computer.x = RANDX;
+    if (Computer.x > WWIDTH - PWIDTH - RANDX)
+        Computer.x = WWIDTH - PWIDTH - RANDX;
 }
+
+
