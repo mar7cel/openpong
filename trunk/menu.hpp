@@ -25,6 +25,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #define pos2 350
 #define pos3 400
 #define pos4 450
+#define pos5 500
 
 #define pMenu CMenu::Get()
 
@@ -43,6 +44,7 @@ class CMenu     :   public OSingleton<CMenu>
                 bool start;         //Start
                 bool fullscreen;    //Fullscreen
                 bool exit;          //Exit
+                bool AI;
     private :
                 CSprite *pBack;     //Hintergrundbild
                 CSprite *pCursor;   //Cursorbild
@@ -55,7 +57,6 @@ class CMenu     :   public OSingleton<CMenu>
                 bool multiplayer;   // Welches Menü ist Aktiv
                 bool option;        // Welches Menü ist Aktiv
                 bool aktiv;         // Ist die Auswahl im Menü auch Aktiviert
-
 };
 
 

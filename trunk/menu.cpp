@@ -30,6 +30,7 @@ CMenu::CMenu()
     yCursor = 300;
     firstpos = pos1;
     lastpos = 0;
+    AI = false;
 }
 CMenu::~CMenu()
 {
@@ -62,7 +63,7 @@ void CMenu::Render()
     if (main == true)
     {
         MainMenu();
-        lastpos = pos4;
+        lastpos = pos5;
     }
     else if (exit == true)
     {
@@ -74,7 +75,7 @@ void CMenu::Render()
         Option();
         lastpos = pos2;
     }
-    SDL_Delay(5);
+    SDL_Delay(2);
 }//Ende Render
 
 //MainMenu
@@ -85,9 +86,10 @@ void CMenu::MainMenu()
         yCursor = pos1;
     pFramework->Text("Simple game with SDL | SDL_TTF | SDL_NET", 225,80);
     pFramework->Text("Singelplayer", 350,pos1);
-    pFramework->Text("Multiplayer geht noch nicht", 350,pos2);
-    pFramework->Text("Optionen", 350,pos3);
-    pFramework->Text("Exit", 350,pos4);
+    pFramework->Text("Player vs. Bott", 350,pos2);
+    pFramework->Text("Multiplayer geht noch nicht", 350,pos3);
+    pFramework->Text("Optionen", 350,pos4);
+    pFramework->Text("Exit", 350,pos5);
 
     pCursor->SetPos(300,yCursor);
 
@@ -96,14 +98,20 @@ void CMenu::MainMenu()
         start = true;
         Quit();
     }
+    if ((yCursor == pos2) && (aktiv == true))
+    {
+        start = true;
+        AI = true;
+        Quit();
+    }
     if ((yCursor == pos4) && (aktiv == true))
     {
-        exit = true;
+        option = true;
         main = false;
     }
-    if ((yCursor == pos3) && (aktiv == true))
+    if ((yCursor == pos5) && (aktiv == true))
     {
-        option = true;
+        exit = true;
         main = false;
     }
     aktiv = false;
@@ -143,6 +151,7 @@ void CMenu::Option()
         main = true;
         option = false;
     }
+    aktiv = false;
 }
 
 //Exit
