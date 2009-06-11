@@ -176,7 +176,7 @@ void CPlayer::Control()
                 right_pressed_p1 = false;
             }
         }
-        if (g_Event.type == SDL_KEYDOWN && iPlayer == 2)
+        if (g_Event.type == SDL_KEYDOWN && iPlayer == 2 && pMenu->AI == false)
         {
             if (g_Event.key.keysym.sym == SDLK_a)
             {
@@ -187,7 +187,7 @@ void CPlayer::Control()
                 right_pressed_p2 = true;
             }
         }
-        if (g_Event.type == SDL_KEYUP && iPlayer == 2)
+        if (g_Event.type == SDL_KEYUP && iPlayer == 2 && pMenu->AI == false)
         {
             if (g_Event.key.keysym.sym == SDLK_a)
             {
