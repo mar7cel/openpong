@@ -63,6 +63,9 @@ class CPlayer
                 int paddle_location;    //Wo trifft der Ball auf den Schläger
                 int paddle_center_cpu;  //CPU Schläger mitte
                 int paddle_location_cpu;//Wo trifft der Ball auf den CPU Schläger
-                bool b_decision;
+                bool b_decision;        //Entscheidung
+                bool release;           //Freigabe des Balles
+                int paddle_rand;
+                int ball_y;
 };
 #endif // PLAYER_HPP_INCLUDED

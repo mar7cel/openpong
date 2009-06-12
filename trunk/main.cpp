@@ -27,7 +27,6 @@ int main ( int argc, char** argv )
     {
         game.Play();     //Spiel laufen lassen
     }
-    printf("all ok\n");
-    printf("cu\n");
+    cout << "Spiel Beendet !" << endl;
     return 0;
 }

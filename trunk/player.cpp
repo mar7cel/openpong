@@ -30,13 +30,13 @@ CPlayer::CPlayer()
     iPlayerPoint = 0;
     iCpuPoint = 0;
     iBall_Speed_X = 0;
-    iBall_Speed_Y = 13;
     paddle_center = 0;
     ball_center = 0;
     paddle_location = 0;
     paddle_center_cpu = 0;
     paddle_location_cpu = 0;
     b_decision = false;
+    release = false;
 }
 
 CPlayer::~CPlayer()
@@ -102,6 +102,8 @@ void CPlayer::Init()
         //client.OpenClient();
     }
 
+    iBall_Speed_Y = 10 +pMenu->iSpeed;
+
 }
 
 //Render
@@ -113,6 +115,7 @@ void CPlayer::Render()
     pComputer->Render();
     pBall->Render();
     Points();
+    cout << iBall_Speed_Y << endl;
 }
 
 //Control
@@ -163,6 +166,10 @@ void CPlayer::Control()
             {
                 pFramework->done = true;
                 return;
+            }
+            if (g_Event.key.keysym.sym == SDLK_SPACE && release == false)
+            {
+                release = true;
             }
         }
         if (g_Event.type == SDL_KEYUP)
@@ -261,75 +268,82 @@ bool CPlayer::Collision(SDL_Rect a , SDL_Rect b)
 //Aufgabe:Ball Bewegen
 void CPlayer::MoveBall()
 {
-    Ball.x += iBall_Speed_X;
-    Ball.y += iBall_Speed_Y;
+    if ( release == false)
+    {
+        pFramework->Text("Space Taste drücken zum Spielen!",280,200);
+    }
+    if (release == true)
+    {
+        Ball.x += iBall_Speed_X;
+        Ball.y += iBall_Speed_Y;
 
-    if (Ball.x > WWIDTH - RANDX)
-    {
-        iBall_Speed_X *= -1;
-    }
-    if (Ball.x < 0)
-    {
-        iBall_Speed_X *= -1;
-    }
+        if (Ball.x > WWIDTH - RANDX)
+        {
+            iBall_Speed_X *= -1;
+        }
+        if (Ball.x < 0)
+        {
+            iBall_Speed_X *= -1;
+        }
 
-    if (Ball.y > WHEIGHT)
-    {
-        iPlayerPoint++;
-        Reset();
-    }
-    if (Ball.y < 0)
-    {
-        iCpuPoint++;
-        Reset();
-    }
+        if (Ball.y > WHEIGHT)
+        {
+            iPlayerPoint++;
+            Reset();
+        }
+        if (Ball.y < 0)
+        {
+            iCpuPoint++;
+            Reset();
+        }
 
-    /*if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Player.x + 20) && Collision(Player,Ball) == true)
-    {
-        iBall_Speed_X *= -1;
-    }
-    if(iBall_Speed_X < 0 && iBall_Speed_Y < 0 && (Ball.x + 10) > (Player.x + Player.w - 20) && Collision(Player,Ball) == true)
-    {
-        iBall_Speed_X *= -1;
-    }
-    if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Computer.x + 20) && Collision(Computer,Ball) == true)
-    {
-        iBall_Speed_X *= -1;
-        cout << " LINKS " << endl;
-    }
-    if(iBall_Speed_X < 0 && iBall_Speed_Y < 0 && (Ball.x + 10) > (Computer.x + Computer.w - 20) && Collision(Computer,Ball) == true)
-    {
-        iBall_Speed_X *= -1;
-        cout << " RECHTS " << endl;
-    }*/
+        /*if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Player.x + 20) && Collision(Player,Ball) == true)
+        {
+            iBall_Speed_X *= -1;
+        }
+        if(iBall_Speed_X < 0 && iBall_Speed_Y < 0 && (Ball.x + 10) > (Player.x + Player.w - 20) && Collision(Player,Ball) == true)
+        {
+            iBall_Speed_X *= -1;
+        }
+        if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Computer.x + 20) && Collision(Computer,Ball) == true)
+        {
+            iBall_Speed_X *= -1;
+            cout << " LINKS " << endl;
+        }
+        if(iBall_Speed_X < 0 && iBall_Speed_Y < 0 && (Ball.x + 10) > (Computer.x + Computer.w - 20) && Collision(Computer,Ball) == true)
+        {
+            iBall_Speed_X *= -1;
+            cout << " RECHTS " << endl;
+        }*/
 
-    paddle_center = Player.x + Player.w / 2;
-    ball_center = Ball.x + Ball.w / 2;
-    paddle_location = ball_center - paddle_center;
+        paddle_center = Player.x + Player.w / 2;
+        ball_center = Ball.x + Ball.w / 2;
+        paddle_location = ball_center - paddle_center;
 
-    paddle_center_cpu = Computer.x + Computer.w / 2;
-    paddle_location_cpu = ball_center - paddle_center_cpu;
+        paddle_center_cpu = Computer.x + Computer.w / 2;
+        paddle_location_cpu = ball_center - paddle_center_cpu;
 
-    if (Collision(Player,Ball) == true)
-    {
-        iBall_Speed_X = paddle_location / 5;
-        iBall_Speed_Y *= -1;
-        pSoundPlayer->Play();
+        if (Collision(Player,Ball) == true)
+        {
+            iBall_Speed_X = paddle_location / 5;
+            iBall_Speed_Y *= -1;
+            pSoundPlayer->Play();
+        }
+        if (Collision(Computer,Ball) == true)
+        {
+            iBall_Speed_X = paddle_location_cpu / 5;
+            iBall_Speed_Y *= -1;
+            pSoundCpu->Play();
+        }
+        pBall->SetPos(Ball.x,Ball.y);
     }
-    if (Collision(Computer,Ball) == true)
-    {
-        iBall_Speed_X = paddle_location_cpu / 5;
-        iBall_Speed_Y *= -1;
-        pSoundCpu->Play();
-    }
-
-    pBall->SetPos(Ball.x,Ball.y);
 }//Ende Bewegen
 
 //Reset
 //Aufgabe:Reseten des Balles
 void CPlayer::Reset()
 {
+
     if (iPlayerPoint > 9 || iCpuPoint > 9)
     {
         iBall_Speed_X = 0;
@@ -341,14 +355,15 @@ void CPlayer::Reset()
         Ball.x = (WWIDTH/2-BALLWH/2);
         Ball.y = (WHEIGHT/2-BALLWH/2);
         iBall_Speed_X = 0;
+        release = false;
     }
     if (Ball.y > WHEIGHT)
     {
-        iBall_Speed_Y = 13;
+        iBall_Speed_Y = (10 + pMenu->iSpeed);
     }
     if (Ball.y < 0)
     {
-        iBall_Speed_Y = -13;
+        iBall_Speed_Y = -(10 + pMenu->iSpeed);
     }
 }//Ende Reset
 
@@ -385,9 +400,9 @@ void CPlayer::Points()
     {
         pFramework->Text("Player 2 hat Gewonnen! ", 10,570);
 
-        if(pMenu->AI == true)
+        if (pMenu->AI == true)
         {
-             pFramework->Text("Computer hat Gewonnen! ", 10,570);
+            pFramework->Text("Computer hat Gewonnen! ", 10,570);
         }
     }
 
@@ -399,44 +414,66 @@ void CPlayer::AI()
 {
 
     paddle_center_cpu = Computer.x + Computer.w / 2;
+    ball_center = Ball.x + Ball.w / 2;
+
+    if(pMenu->AI_hard == true)
+    {
+        paddle_rand = 10;
+        ball_y = 0;
+    }
+    if(pMenu->AI_easy == true)
+    {
+        paddle_rand = 10;
+        ball_y = 150;
+    }
+
+    if(!pMenu->AI_easy && !pMenu->AI_hard)
+    {
+        pMenu->AI_easy = true;
+    }
+
     static int decision;
+
     static int last_speed = iBall_Speed_Y;
 
     if (last_speed != iBall_Speed_Y)
-	{
-		decision = rand() % 2 + 1;
+    {
+        decision = rand() % 2 + 1;
 
-		last_speed = iBall_Speed_Y;
-	}
+        last_speed = iBall_Speed_Y;
+    }
 
-	switch (decision)
-	{
-		case 1:
-		{
-			b_decision = true;
+    switch (decision)
+    {
+    case 1:
+    {
+        b_decision = true;
+    }
+    break;
 
-		} break;
-
-		case 2:
-		{
-			b_decision = false;
-
-		} break;
-	}
-
-    if((Ball.x+10 > paddle_center_cpu) && iBall_Speed_Y > 0)
+    case 2:
+    {
+        b_decision = false;
+    }
+    break;
+    }
+    // AI Mit Ball Bewegen
+    if ((ball_center > paddle_center_cpu + paddle_rand) && iBall_Speed_Y > 0 && Ball.y > ball_y)
     {
         Computer.x += SPEEDPLAYER;
     }
-    else if(iBall_Speed_Y < 0 && paddle_center_cpu < WWIDTH/2 && b_decision == true)
+    // In die mitte Zurückkehren wenn die Entscheidung wahr ist oder die Runde vorbei ist
+    if ((iBall_Speed_Y < 0 && paddle_center_cpu < WWIDTH/2 && b_decision == true) || (release == false && paddle_center_cpu < WWIDTH/2 && paddle_center_cpu < ball_center))
     {
         Computer.x += SPEEDPLAYER;
     }
-    if((Ball.x+10 < paddle_center_cpu) && iBall_Speed_Y > 0)
+    // AI Mit Ball Bewegen
+    if ((ball_center < paddle_center_cpu - paddle_rand) && iBall_Speed_Y > 0 && Ball.y > ball_y)
     {
         Computer.x -= SPEEDPLAYER;
     }
-    else if(iBall_Speed_Y < 0 && paddle_center_cpu > WWIDTH/2 && b_decision == true)
+    // In die mitte Zurückkehren wenn die Entscheidung wahr ist oder die Runde vorbei ist
+    if ((iBall_Speed_Y < 0 && paddle_center_cpu > WWIDTH/2 && b_decision == true) || (release == false && paddle_center_cpu > WWIDTH/2 && paddle_center_cpu > ball_center))
     {
         Computer.x -= SPEEDPLAYER;
     }

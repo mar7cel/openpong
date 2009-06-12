@@ -31,6 +31,9 @@ CMenu::CMenu()
     firstpos = pos1;
     lastpos = 0;
     AI = false;
+    AI_easy = false;
+    AI_hard = false;
+    iSpeed = 0;
 }
 CMenu::~CMenu()
 {
@@ -73,7 +76,7 @@ void CMenu::Render()
     else if (option == true)
     {
         Option();
-        lastpos = pos2;
+        lastpos = pos7;
     }
     SDL_Delay(2);
 }//Ende Render
@@ -82,11 +85,12 @@ void CMenu::Render()
 //Aufgabe:Erstellt das Hauptmenü
 void CMenu::MainMenu()
 {
+    firstpos = pos1;
     if (yCursor > lastpos)
         yCursor = pos1;
-    pFramework->Text("Simple game with SDL | SDL_TTF | SDL_NET", 225,80);
+    pFramework->Text("Open Pong", 360,80);
     pFramework->Text("Singelplayer", 350,pos1);
-    pFramework->Text("Player vs. Bott", 350,pos2);
+    pFramework->Text("Player vs. Bot", 350,pos2);
     pFramework->Text("Multiplayer geht noch nicht", 350,pos3);
     pFramework->Text("Optionen", 350,pos4);
     pFramework->Text("Exit", 350,pos5);
@@ -132,7 +136,14 @@ void CMenu::Option()
     pFramework->Text("FullScreen", 250,pos0);
     pFramework->Text("Ja", 500,pos0);
     pFramework->Text("Nein", 500,pos1);
-    pFramework->Text("Zurueck", 500,pos2);
+    pFramework->Text("Computer KI", 250,pos2);
+    pFramework->Text("Easy", 500,pos2);
+    pFramework->Text("Hard", 500,pos3);
+    pFramework->Text("Ball Geschwindigkeit", 250,pos4);
+    pFramework->Text("Normal", 500,pos4);
+    pFramework->Text("Mittel", 500,pos5);
+    pFramework->Text("2Fast4You", 500,pos6);
+    pFramework->Text("Zurueck", 500,pos7);
 
     pCursor->SetPos(450,yCursor);
 
@@ -147,6 +158,28 @@ void CMenu::Option()
         fullscreen = false;
     }
     if ((yCursor == pos2) && (aktiv == true))
+    {
+        AI_easy = true;
+        AI_hard = false;
+    }
+    if ((yCursor == pos3) && (aktiv == true))
+    {
+        AI_hard = true;
+        AI_easy = false;
+    }
+    if ((yCursor == pos4) && (aktiv == true))
+    {
+        iSpeed = 0;
+    }
+    if ((yCursor == pos5) && (aktiv == true))
+    {
+        iSpeed = 5;
+    }
+    if ((yCursor == pos6) && (aktiv == true))
+    {
+        iSpeed = 10;
+    }
+    if ((yCursor == pos7) && (aktiv == true))
     {
         main = true;
         option = false;
@@ -250,7 +283,7 @@ void CMenu::Control()
 
     if (up_pressed)
     {
-        yCursor -= 50;
+        yCursor -= 25;
         if (yCursor < firstpos)
         {
             yCursor = firstpos;
@@ -259,7 +292,7 @@ void CMenu::Control()
     }
     if (down_pressed)
     {
-        yCursor += 50;
+        yCursor += 25;
         if (yCursor > lastpos)
         {
             yCursor = lastpos;
