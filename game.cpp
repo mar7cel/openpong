@@ -69,7 +69,7 @@ void CGame::Menu()
     }
     cout << "Spiel Gestartet !" << endl;
     m_Player.Init();
-    m_Player.iPlayer = 2;
+    m_Player.i_Player = 2;
 }//Menu ende
 
 //Play

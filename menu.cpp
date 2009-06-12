@@ -191,7 +191,8 @@ void CMenu::Option()
 //Aufgabe:Erstellt das Exit Menü
 void CMenu::Exit()
 {
-    if (yCursor > lastpos)
+    firstpos = pos1;
+    if (yCursor > pos2)
         yCursor = pos1;
     pFramework->Text("Wirklich beenden ??", 225,80);
     pFramework->Text("Ja", 350,pos1);
@@ -238,14 +239,8 @@ void CMenu::Control()
         {
             if (g_Event.key.keysym.sym == SDLK_ESCAPE)
             {
-                if (fullscreen == true)
-                {
-                    pScreen = pFramework->GetScreen();
-                    SDL_WM_ToggleFullScreen(pScreen);
-                }
-                fullscreen = false;
-                start = true;
-                pFramework->done = true;
+                exit = true;
+                main = false;
             }
             if (g_Event.key.keysym.sym == SDLK_UP)
             {

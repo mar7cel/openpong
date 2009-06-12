@@ -24,19 +24,21 @@ CPlayer::CPlayer()
     pBack = NULL;
     pSoundPlayer = NULL;
     pSoundCpu = NULL;
-    iPlayer = 0;
-    host = false;
-    guest = false;
+    i_Player = 0;
+    b_host = false;
+    b_guest = false;
     iPlayerPoint = 0;
     iCpuPoint = 0;
-    iBall_Speed_X = 0;
-    paddle_center = 0;
-    ball_center = 0;
-    paddle_location = 0;
-    paddle_center_cpu = 0;
-    paddle_location_cpu = 0;
+    i_Ball_Speed_X = 0;
+    ipaddle_center = 0;
+    iball_center = 0;
+    ipaddle_location = 0;
+    ipaddle_center_cpu = 0;
+    ipaddle_location_cpu = 0;
     b_decision = false;
     release = false;
+    ipaddle_rand = 0;
+    iball_y = 0;
 }
 
 CPlayer::~CPlayer()
@@ -53,6 +55,7 @@ CPlayer::~CPlayer()
 //Aufgabe:Initialisiert die Spieler und den Ball
 void CPlayer::Init()
 {
+
     pPlayer = new CSprite;
     pComputer = new CSprite;
     pBall = new CSprite;
@@ -93,16 +96,16 @@ void CPlayer::Init()
     pBack->Load("gfx/game/back.bmp");
     pBack->SetPos(0,0);
 
-    if (host == true)
+    if (b_host == true)
     {
         //server.OpenServer();
     }
-    if (guest == true)
+    if (b_guest == true)
     {
         //client.OpenClient();
     }
 
-    iBall_Speed_Y = 10 +pMenu->iSpeed;
+    i_Ball_Speed_Y = 10 +pMenu->iSpeed;
 
 }
 
@@ -115,7 +118,6 @@ void CPlayer::Render()
     pComputer->Render();
     pBall->Render();
     Points();
-    cout << iBall_Speed_Y << endl;
 }
 
 //Control
@@ -183,7 +185,7 @@ void CPlayer::Control()
                 right_pressed_p1 = false;
             }
         }
-        if (g_Event.type == SDL_KEYDOWN && iPlayer == 2 && pMenu->AI == false)
+        if (g_Event.type == SDL_KEYDOWN && i_Player == 2 && pMenu->AI == false)
         {
             if (g_Event.key.keysym.sym == SDLK_a)
             {
@@ -194,7 +196,7 @@ void CPlayer::Control()
                 right_pressed_p2 = true;
             }
         }
-        if (g_Event.type == SDL_KEYUP && iPlayer == 2 && pMenu->AI == false)
+        if (g_Event.type == SDL_KEYUP && i_Player == 2 && pMenu->AI == false)
         {
             if (g_Event.key.keysym.sym == SDLK_a)
             {
@@ -252,15 +254,8 @@ void CPlayer::Control()
 
 bool CPlayer::Collision(SDL_Rect a , SDL_Rect b)
 {
-    /*if(b.x + b.w < a.x)return false; //Links
-    if(b.x > a.x + a.w)return false; //Rechts
-    if(b.y + b.h < a.y)return false; //Oben
-    if(b.y > a.y + a.h)return false; //Unten*/
 
     if ((b.x + b.w < a.x)||(b.x > a.x + a.w)||(b.y + b.h < a.y)||(b.y > a.y + a.h)) return false;
-
-    /*    if  (( b.y < a.y + a.h ) && ( b.y + b.h > a.y ) &&
-            ( b.x < a.x + a.w ) && ( b.x + b.w > a.x )) return true;*/
     return true;
 }
 
@@ -274,16 +269,16 @@ void CPlayer::MoveBall()
     }
     if (release == true)
     {
-        Ball.x += iBall_Speed_X;
-        Ball.y += iBall_Speed_Y;
+        Ball.x += i_Ball_Speed_X;
+        Ball.y += i_Ball_Speed_Y;
 
         if (Ball.x > WWIDTH - RANDX)
         {
-            iBall_Speed_X *= -1;
+            i_Ball_Speed_X *= -1;
         }
         if (Ball.x < 0)
         {
-            iBall_Speed_X *= -1;
+            i_Ball_Speed_X *= -1;
         }
 
         if (Ball.y > WHEIGHT)
@@ -297,42 +292,23 @@ void CPlayer::MoveBall()
             Reset();
         }
 
-        /*if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Player.x + 20) && Collision(Player,Ball) == true)
-        {
-            iBall_Speed_X *= -1;
-        }
-        if(iBall_Speed_X < 0 && iBall_Speed_Y < 0 && (Ball.x + 10) > (Player.x + Player.w - 20) && Collision(Player,Ball) == true)
-        {
-            iBall_Speed_X *= -1;
-        }
-        if(iBall_Speed_X > 0 && iBall_Speed_Y < 0 && (Ball.x + 10) < (Computer.x + 20) && Collision(Computer,Ball) == true)
-        {
-            iBall_Speed_X *= -1;
-            cout << " LINKS " << endl;
-        }
-        if(iBall_Speed_X < 0 && iBall_Speed_Y < 0 && (Ball.x + 10) > (Computer.x + Computer.w - 20) && Collision(Computer,Ball) == true)
-        {
-            iBall_Speed_X *= -1;
-            cout << " RECHTS " << endl;
-        }*/
+        ipaddle_center = Player.x + Player.w / 2;
+        iball_center = Ball.x + Ball.w / 2;
+        ipaddle_location = iball_center - ipaddle_center;
 
-        paddle_center = Player.x + Player.w / 2;
-        ball_center = Ball.x + Ball.w / 2;
-        paddle_location = ball_center - paddle_center;
-
-        paddle_center_cpu = Computer.x + Computer.w / 2;
-        paddle_location_cpu = ball_center - paddle_center_cpu;
+        ipaddle_center_cpu = Computer.x + Computer.w / 2;
+        ipaddle_location_cpu = iball_center - ipaddle_center_cpu;
 
         if (Collision(Player,Ball) == true)
         {
-            iBall_Speed_X = paddle_location / 5;
-            iBall_Speed_Y *= -1;
+            i_Ball_Speed_X = ipaddle_location / 5;
+            i_Ball_Speed_Y *= -1;
             pSoundPlayer->Play();
         }
         if (Collision(Computer,Ball) == true)
         {
-            iBall_Speed_X = paddle_location_cpu / 5;
-            iBall_Speed_Y *= -1;
+            i_Ball_Speed_X = ipaddle_location_cpu / 5;
+            i_Ball_Speed_Y *= -1;
             pSoundCpu->Play();
         }
         pBall->SetPos(Ball.x,Ball.y);
@@ -346,24 +322,24 @@ void CPlayer::Reset()
 
     if (iPlayerPoint > 9 || iCpuPoint > 9)
     {
-        iBall_Speed_X = 0;
-        iBall_Speed_Y = 0;
+        i_Ball_Speed_X = 0;
+        i_Ball_Speed_Y = 0;
         pFramework->Text("Nochmal Spielen ? (J)a / (N)ein",280,200);
     }
     else
     {
         Ball.x = (WWIDTH/2-BALLWH/2);
         Ball.y = (WHEIGHT/2-BALLWH/2);
-        iBall_Speed_X = 0;
+        i_Ball_Speed_X = 0;
         release = false;
     }
     if (Ball.y > WHEIGHT)
     {
-        iBall_Speed_Y = (10 + pMenu->iSpeed);
+        i_Ball_Speed_Y = (10 + pMenu->iSpeed);
     }
     if (Ball.y < 0)
     {
-        iBall_Speed_Y = -(10 + pMenu->iSpeed);
+        i_Ball_Speed_Y = -(10 + pMenu->iSpeed);
     }
 }//Ende Reset
 
@@ -383,7 +359,7 @@ void CPlayer::Points()
     pFramework->Text("Player 1 : "+pla, 10,10);
     pFramework->Text("Player 2 : "+cpu, 10,570);
 
-    if (host == true || guest == true)
+    if (b_host == true || b_guest == true)
     {
         pFramework->Text("Host : "+pla, 10,10);
         pFramework->Text("Client : "+cpu, 10,570);
@@ -413,18 +389,18 @@ void CPlayer::Points()
 void CPlayer::AI()
 {
 
-    paddle_center_cpu = Computer.x + Computer.w / 2;
-    ball_center = Ball.x + Ball.w / 2;
+    ipaddle_center_cpu = Computer.x + Computer.w / 2;
+    iball_center = Ball.x + Ball.w / 2;
 
     if(pMenu->AI_hard == true)
     {
-        paddle_rand = 10;
-        ball_y = 0;
+        ipaddle_rand = 10;
+        iball_y = 0;
     }
     if(pMenu->AI_easy == true)
     {
-        paddle_rand = 10;
-        ball_y = 150;
+        ipaddle_rand = 10;
+        iball_y = 150;
     }
 
     if(!pMenu->AI_easy && !pMenu->AI_hard)
@@ -434,13 +410,13 @@ void CPlayer::AI()
 
     static int decision;
 
-    static int last_speed = iBall_Speed_Y;
+    static int last_speed = i_Ball_Speed_Y;
 
-    if (last_speed != iBall_Speed_Y)
+    if (last_speed != i_Ball_Speed_Y)
     {
         decision = rand() % 2 + 1;
 
-        last_speed = iBall_Speed_Y;
+        last_speed = i_Ball_Speed_Y;
     }
 
     switch (decision)
@@ -458,22 +434,22 @@ void CPlayer::AI()
     break;
     }
     // AI Mit Ball Bewegen
-    if ((ball_center > paddle_center_cpu + paddle_rand) && iBall_Speed_Y > 0 && Ball.y > ball_y)
+    if ((iball_center > ipaddle_center_cpu + ipaddle_rand) && i_Ball_Speed_Y > 0 && Ball.y > iball_y)
     {
         Computer.x += SPEEDPLAYER;
     }
     // In die mitte Zurückkehren wenn die Entscheidung wahr ist oder die Runde vorbei ist
-    if ((iBall_Speed_Y < 0 && paddle_center_cpu < WWIDTH/2 && b_decision == true) || (release == false && paddle_center_cpu < WWIDTH/2 && paddle_center_cpu < ball_center))
+    if ((i_Ball_Speed_Y < 0 && ipaddle_center_cpu < WWIDTH/2 && b_decision == true) || (release == false && ipaddle_center_cpu < WWIDTH/2 && ipaddle_center_cpu < iball_center))
     {
         Computer.x += SPEEDPLAYER;
     }
     // AI Mit Ball Bewegen
-    if ((ball_center < paddle_center_cpu - paddle_rand) && iBall_Speed_Y > 0 && Ball.y > ball_y)
+    if ((iball_center < ipaddle_center_cpu - ipaddle_rand) && i_Ball_Speed_Y > 0 && Ball.y > iball_y)
     {
         Computer.x -= SPEEDPLAYER;
     }
     // In die mitte Zurückkehren wenn die Entscheidung wahr ist oder die Runde vorbei ist
-    if ((iBall_Speed_Y < 0 && paddle_center_cpu > WWIDTH/2 && b_decision == true) || (release == false && paddle_center_cpu > WWIDTH/2 && paddle_center_cpu > ball_center))
+    if ((i_Ball_Speed_Y < 0 && ipaddle_center_cpu > WWIDTH/2 && b_decision == true) || (release == false && ipaddle_center_cpu > WWIDTH/2 && ipaddle_center_cpu > iball_center))
     {
         Computer.x -= SPEEDPLAYER;
     }

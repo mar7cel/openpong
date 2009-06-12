@@ -36,13 +36,13 @@ class CPlayer
                 void Reset();           //Resetet das Spiel
                 void Points();          //Berechnet Punkte der Spieler und gibt Sie aus
                 void AI();              //Computer Gegner
-                short int iPlayer;      //Anzahl der Spieler
-                int iBall_Speed_X;      //X Geschwindigkeit des Balles
-                int iBall_Speed_Y;      //Y Geschwindigkeit des Balles
+                short int i_Player;     //Anzahl der Spieler
+                int i_Ball_Speed_X;     //X Geschwindigkeit des Balles
+                int i_Ball_Speed_Y;     //Y Geschwindigkeit des Balles
                 //CServer server;
                 //CClient client;
-                bool host;
-                bool guest;
+                bool b_host;            //Läuft das Spiel als Server
+                bool b_guest;           //Läuft das Spiel als Client
     private :
                 CSprite *pPlayer;       //Spieler Bild
                 CSprite *pComputer;     //Spieler Bild
@@ -50,22 +50,22 @@ class CPlayer
                 CSprite *pBack;         //Hintergrundbild
                 CSound *pSoundPlayer;   //Sound für den Player
                 CSound *pSoundCpu;      //Sound für den Computer
-                SDL_Surface *pScreen;//Bildschirm auf den Gerendert wird
+                SDL_Surface *pScreen;   //Bildschirm auf den Gerendert wird
                 SDL_Rect Player;        //Rect des Players
                 SDL_Rect Computer;      //Rect des Players
                 SDL_Rect Ball;          //Rect des Balles
                 SDL_Rect m_Rect;        //Ein Rect
                 SDL_Event g_Event;      //SDL Event
-                int iPlayerPoint;       //Spieler Punkte
-                int iCpuPoint;          //Spieler Punkte
-                int paddle_center;      //Spieler Schläger mitte
-                int ball_center;        //Ball mitte
-                int paddle_location;    //Wo trifft der Ball auf den Schläger
-                int paddle_center_cpu;  //CPU Schläger mitte
-                int paddle_location_cpu;//Wo trifft der Ball auf den CPU Schläger
-                bool b_decision;        //Entscheidung
+                short int iPlayerPoint; //Spieler Punkte
+                short int iCpuPoint;    //Spieler Punkte
+                int ipaddle_center;     //Spieler Schläger mitte
+                int iball_center;       //Ball mitte
+                int ipaddle_location;   //Wo trifft der Ball auf den Schläger
+                int ipaddle_center_cpu; //CPU Schläger mitte
+                int ipaddle_location_cpu;//Wo trifft der Ball auf den CPU Schläger
+                bool b_decision;        //Entscheidung "zurück an start oder nicht"
                 bool release;           //Freigabe des Balles
-                int paddle_rand;
-                int ball_y;
+                int ipaddle_rand;        //welche Toleranz hat das Paddle im Bezug auf die mitte des Balles
+                int iball_y;             //Ab wann soll die KI Reagieren
 };
 #endif // PLAYER_HPP_INCLUDED
