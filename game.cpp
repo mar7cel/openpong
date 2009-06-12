@@ -51,12 +51,15 @@ void CGame::Init()
     //Menu Initialisieren
     pMenu->Init();
     pMenu->fullscreen = fullscreen;
+
+    cout << "Spiel Initialisiert !" << endl;
 }//Init ende
 
 //Menu
 //Aufgabe:Menu des Spieles
 void CGame::Menu()
 {
+    cout << "Menü Gestartet !" << endl;
     while (!pMenu->start)
     {
         pFramework->Clear();
@@ -64,6 +67,7 @@ void CGame::Menu()
         pMenu->Control();
         pFramework->Flip();
     }
+    cout << "Spiel Gestartet !" << endl;
     m_Player.Init();
     m_Player.iPlayer = 2;
 }//Menu ende
@@ -72,6 +76,7 @@ void CGame::Menu()
 //Aufgabe:Spiel Startet
 void CGame::Play()
 {
+
     if ( (SDL_GetTicks() - iTimer) >= FRAME_RATE )
         {
         pFramework->Clear();

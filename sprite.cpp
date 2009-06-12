@@ -56,8 +56,8 @@ void CSprite::Load (const string sFilename)
 //Aufgabe:Position des Sprites auf dem Bildschirm
 void CSprite::SetPos(int iPosX, int iPosY)
 {
-    m_Rect.x = iPosX;
-    m_Rect.y = iPosY;
+    m_Rect.x = static_cast<int>(iPosX);
+    m_Rect.y = static_cast<int>(iPosY);
 }//Ende SetPos
 
 //Render

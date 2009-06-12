@@ -21,11 +21,13 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #include "sprite.hpp"
 
 #define pos0 250
-#define pos1 300
-#define pos2 350
-#define pos3 400
-#define pos4 450
-#define pos5 500
+#define pos1 275
+#define pos2 300
+#define pos3 325
+#define pos4 350
+#define pos5 375
+#define pos6 400
+#define pos7 425
 
 #define pMenu CMenu::Get()
 
@@ -44,7 +46,10 @@ class CMenu     :   public OSingleton<CMenu>
                 bool start;         //Start
                 bool fullscreen;    //Fullscreen
                 bool exit;          //Exit
-                bool AI;
+                bool AI;            //AI Aktiv
+                bool AI_easy;       //AI Einfach
+                bool AI_hard;       //AI Hard
+                int iSpeed;         //Ball y Geschwindigkeit
     private :
                 CSprite *pBack;     //Hintergrundbild
                 CSprite *pCursor;   //Cursorbild
