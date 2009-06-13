@@ -62,6 +62,7 @@ class CMenu     :   public OSingleton<CMenu>
                 bool multiplayer;   // Welches Menü ist Aktiv
                 bool option;        // Welches Menü ist Aktiv
                 bool aktiv;         // Ist die Auswahl im Menü auch Aktiviert
+                int iColor;
 };
 
 

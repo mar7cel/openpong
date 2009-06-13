@@ -151,33 +151,40 @@ void CMenu::Option()
     {
         SDL_WM_ToggleFullScreen(pScreen);
         fullscreen = true;
+        cout << "FullScreen on" << endl;
     }
     if ((yCursor == pos1) && (aktiv == true) && (fullscreen == true))
     {
         SDL_WM_ToggleFullScreen(pScreen);
         fullscreen = false;
+        cout << "FullScreen off" << endl;
     }
     if ((yCursor == pos2) && (aktiv == true))
     {
         AI_easy = true;
         AI_hard = false;
+        cout << "AI Easy" << endl;
     }
     if ((yCursor == pos3) && (aktiv == true))
     {
         AI_hard = true;
         AI_easy = false;
+        cout << "AI Hard" << endl;
     }
     if ((yCursor == pos4) && (aktiv == true))
     {
         iSpeed = 0;
+        cout << "Geschwindigkeit Langsam" << endl;
     }
     if ((yCursor == pos5) && (aktiv == true))
     {
         iSpeed = 5;
+        cout << "Geschwindigkeit Mittel" << endl;
     }
     if ((yCursor == pos6) && (aktiv == true))
     {
         iSpeed = 10;
+        cout << "Geschwindigkeit Hoch" << endl;
     }
     if ((yCursor == pos7) && (aktiv == true))
     {
