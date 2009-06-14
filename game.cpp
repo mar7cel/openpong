@@ -76,7 +76,6 @@ void CGame::Menu()
 //Aufgabe:Spiel Startet
 void CGame::Play()
 {
-
     if ( (SDL_GetTicks() - iTimer) >= FRAME_RATE )
         {
         pFramework->Clear();

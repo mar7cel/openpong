@@ -39,10 +39,8 @@ class CPlayer
                 short int i_Player;     //Anzahl der Spieler
                 int i_Ball_Speed_X;     //X Geschwindigkeit des Balles
                 int i_Ball_Speed_Y;     //Y Geschwindigkeit des Balles
-                //CServer server;
-                //CClient client;
-                bool b_host;            //Läuft das Spiel als Server
-                bool b_guest;           //Läuft das Spiel als Client
+                CServer server;
+                CClient client;
     private :
                 CSprite *pPlayer;       //Spieler Bild
                 CSprite *pComputer;     //Spieler Bild

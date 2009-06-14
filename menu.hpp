@@ -40,6 +40,7 @@ class CMenu     :   public OSingleton<CMenu>
                 void Render();      //Rendert das Menü
                 void Control();     //Steuerung für das Menü
                 void MainMenu();    //Hauptmenü
+                void Multiplayer(); //Multiplayer Menü
                 void Option();      //Optionen für das Spiel
                 void Exit();        //Exit Menü
                 void Quit();        //Fährt alles im Menü wieder runter
@@ -50,6 +51,8 @@ class CMenu     :   public OSingleton<CMenu>
                 bool AI_easy;       //AI Einfach
                 bool AI_hard;       //AI Hard
                 int iSpeed;         //Ball y Geschwindigkeit
+                bool bServer;       //Server öffnen
+                bool bClient;       //Client starten
     private :
                 CSprite *pBack;     //Hintergrundbild
                 CSprite *pCursor;   //Cursorbild
@@ -62,7 +65,7 @@ class CMenu     :   public OSingleton<CMenu>
                 bool multiplayer;   // Welches Menü ist Aktiv
                 bool option;        // Welches Menü ist Aktiv
                 bool aktiv;         // Ist die Auswahl im Menü auch Aktiviert
-                int iColor;
+                bool key;
 };
 
 

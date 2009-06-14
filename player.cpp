@@ -25,8 +25,6 @@ CPlayer::CPlayer()
     pSoundPlayer = NULL;
     pSoundCpu = NULL;
     i_Player = 0;
-    b_host = false;
-    b_guest = false;
     iPlayerPoint = 0;
     iCpuPoint = 0;
     i_Ball_Speed_X = 0;
@@ -96,16 +94,16 @@ void CPlayer::Init()
     pBack->Load("gfx/game/back.bmp");
     pBack->SetPos(0,0);
 
-    if (b_host == true)
-    {
-        //server.OpenServer();
-    }
-    if (b_guest == true)
-    {
-        //client.OpenClient();
-    }
-
     i_Ball_Speed_Y = 10 +pMenu->iSpeed;
+
+    if (pMenu->bServer == true)
+    {
+        server.OpenServer();
+    }
+    if (pMenu->bClient == true)
+    {
+        client.OpenClient();
+    }
 
 }
 
@@ -124,6 +122,7 @@ void CPlayer::Render()
 //Bewegungen der Spieler
 void CPlayer::Control()
 {
+
     pScreen = pFramework->GetScreen();
 
     static bool left_pressed_p1  = false;
@@ -213,30 +212,30 @@ void CPlayer::Control()
     if (left_pressed_p1)
     {
         Player.x -= SPEEDPLAYER;
-        pPlayer->SetPos(Player.x,Player.y);
         if (Player.x < RANDX)
             Player.x = RANDX;
+        pPlayer->SetPos(Player.x,Player.y);
     }
     if (right_pressed_p1)
     {
         Player.x += SPEEDPLAYER;
-        pPlayer->SetPos(Player.x,Player.y);
         if (Player.x > WWIDTH - PWIDTH - RANDX)
             Player.x = WWIDTH - PWIDTH - RANDX;
+        pPlayer->SetPos(Player.x,Player.y);
     }
     if (left_pressed_p2)
     {
         Computer.x -= SPEEDPLAYER;
-        pComputer->SetPos(Computer.x,Computer.y);
         if (Computer.x < RANDX)
             Computer.x = RANDX;
+        pComputer->SetPos(Computer.x,Computer.y);
     }
     if (right_pressed_p2)
     {
         Computer.x += SPEEDPLAYER;
-        pComputer->SetPos(Computer.x,Computer.y);
         if (Computer.x > WWIDTH - PWIDTH - RANDX)
             Computer.x = WWIDTH - PWIDTH - RANDX;
+        pComputer->SetPos(Computer.x,Computer.y);
     }
     /*if(host == true)
     {
@@ -359,7 +358,7 @@ void CPlayer::Points()
     pFramework->Text("Player 1 : "+pla, 10,10);
     pFramework->Text("Player 2 : "+cpu, 10,570);
 
-    if (b_host == true || b_guest == true)
+    if (pMenu->bServer == true || pMenu->bClient == true)
     {
         pFramework->Text("Host : "+pla, 10,10);
         pFramework->Text("Client : "+cpu, 10,570);
@@ -454,12 +453,12 @@ void CPlayer::AI()
         Computer.x -= SPEEDPLAYER;
     }
 
-    pComputer->SetPos(Computer.x,Computer.y);
-
     if (Computer.x < RANDX)
         Computer.x = RANDX;
     if (Computer.x > WWIDTH - PWIDTH - RANDX)
         Computer.x = WWIDTH - PWIDTH - RANDX;
+
+    pComputer->SetPos(Computer.x,Computer.y);
 }
 
 

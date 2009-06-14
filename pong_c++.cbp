@@ -16,9 +16,9 @@
 				</Compiler>
 				<Linker>
 					<Add option="`sdl-config --libs`" />
-					<Add library="libs/libSDL_net-1.2.so" />
-					<Add library="libs/libSDL_ttf-2.0.so" />
-					<Add library="libs/libSDL_mixer.so" />
+					<Add library="../../../../../../../usr/lib/libSDL_ttf.so" />
+					<Add library="../../../../../../../usr/lib/libSDL_mixer.so" />
+					<Add library="../../../../../../../usr/lib/libSDL_net.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,9 +31,9 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="libs/libSDL_net-1.2.so" />
-					<Add library="libs/libSDL_ttf-2.0.so" />
-					<Add library="libs/libSDL_mixer.so" />
+					<Add library="../../../../../../../usr/lib/libSDL_net.so" />
+					<Add library="../../../../../../../usr/lib/libSDL_ttf.so" />
+					<Add library="../../../../../../../usr/lib/libSDL_mixer.so" />
 				</Linker>
 			</Target>
 		</Build>
@@ -43,9 +43,9 @@
 		</Compiler>
 		<Linker>
 			<Add option="`sdl-config --libs`" />
-			<Add library="libs/libSDL_mixer.so" />
-			<Add library="libs/libSDL_net-1.2.so" />
-			<Add library="libs/libSDL_ttf-2.0.so" />
+			<Add library="../../../../../../../usr/lib/libSDL_mixer.so" />
+			<Add library="../../../../../../../usr/lib/libSDL_net.so" />
+			<Add library="../../../../../../../usr/lib/libSDL_ttf.so" />
 		</Linker>
 		<Unit filename="client.cpp" />
 		<Unit filename="client.hpp" />

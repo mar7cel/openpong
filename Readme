@@ -19,7 +19,8 @@ Benötigte Libs	:
 			libSDL_net-1.2
 			libSDL_ttf-2.0
 
-Steuerung	:	Im Singelplayer Modus Steuert man die beiden Spieler
+Steuerung	:	
+			Im Singelplayer Modus Steuert man die beiden Spieler
 			über die Tastatur.
 			Spieler 1 : LEFT , RIGHT
 			Spieler 2 : A , D
@@ -27,3 +28,9 @@ Steuerung	:	Im Singelplayer Modus Steuert man die beiden Spieler
 			Im Player vs. Bot Modus wird nur der Spieler 1 Gesteuert.
 			Spieler 1 : LEFT , RIGHT 
 			Spieler 2 : Wird von der "KI" Gesteuert.
+
+Optionen	:	
+			Man kann Auswählen zwischen
+			FullScreen on/off
+			KI leicht/schwer
+			Geschwindigkeit leicht/mittel/schwer

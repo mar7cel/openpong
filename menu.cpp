@@ -34,6 +34,8 @@ CMenu::CMenu()
     AI_easy = false;
     AI_hard = false;
     iSpeed = 0;
+    bServer = false;
+    bClient = false;
 }
 CMenu::~CMenu()
 {
@@ -73,6 +75,11 @@ void CMenu::Render()
         Exit();
         lastpos = pos2;
     }
+    else if (multiplayer == true)
+    {
+        Multiplayer();
+        lastpos = pos2;
+    }
     else if (option == true)
     {
         Option();
@@ -107,6 +114,11 @@ void CMenu::MainMenu()
         start = true;
         AI = true;
         Quit();
+    }
+    if ((yCursor == pos3) && (aktiv == true))
+    {
+        multiplayer = false;
+        main = true;
     }
     if ((yCursor == pos4) && (aktiv == true))
     {
@@ -192,6 +204,60 @@ void CMenu::Option()
         option = false;
     }
     aktiv = false;
+
+    if(fullscreen == true)
+    {
+        pFramework->Text("AKTIV",600,pos0);
+    }
+    else if(!fullscreen)
+    {
+        pFramework->Text("AKTIV",600,pos1);
+    }
+    if(AI_easy == true || (!AI_easy && !AI_hard))
+    {
+        pFramework->Text("AKTIV",600,pos2);
+    }
+    else if(AI_hard == true)
+    {
+        pFramework->Text("AKTIV",600,pos3);
+    }
+    if(iSpeed == 0)
+    {
+        pFramework->Text("AKTIV",600,pos4);
+    }
+    else if(iSpeed == 5)
+    {
+        pFramework->Text("AKTIV",600,pos5);
+    }
+    else if(iSpeed == 10)
+    {
+        pFramework->Text("AKTIV",600,pos6);
+    }
+
+}
+
+//Multiplayer
+//Aufgabe:Erstellt das Multiplayer Menü
+void CMenu::Multiplayer()
+{
+    if (yCursor > lastpos)
+        yCursor = pos1;
+    firstpos = pos1;
+    pFramework->Text("Multiplayer", 360,80);
+    pFramework->Text("Host a Game", 360,pos1);
+    pFramework->Text("Connect to a Game", 360,pos2);
+    pCursor->SetPos(300,yCursor);
+
+    if ((yCursor == pos1) && (aktiv == true))
+    {
+        start = true;
+        bServer = true;
+    }
+    if ((yCursor == pos2) && (aktiv == true))
+    {
+        start = true;
+        bClient = true;
+    }
 }
 
 //Exit
@@ -232,7 +298,7 @@ void CMenu::Control()
     static bool up_pressed  = false;
     static bool down_pressed = false;
     static bool return_pressed = false;
-
+    //static bool key  = false;
 
     if ( SDL_PollEvent(&g_Event) )
     {
@@ -306,12 +372,22 @@ void CMenu::Control()
     {
         return_pressed = false;
     }
-    /*switch (g_Event.type)
+    /*string a = SDL_GetKeyName(g_Event.key.keysym.sym);
+    if(bClient == false)
     {
+    switch (g_Event.type)
+        {
       	case SDL_KEYDOWN:
-              string s = SDL_GetKeyName(g_Event.key.keysym.sym);
-              cout << "Taste : " << s+s << endl;
-    break;
+              key = false;
+            break;
+        case SDL_KEYUP:
+              if(key == false)
+              {
+                  a += a;
+                  key = true;
+              }
+            break;
+        }
     }*/
 }//Ende Control
 
