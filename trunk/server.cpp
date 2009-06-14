@@ -49,14 +49,15 @@ void CServer::OpenServer()
     }
 
     client = SDLNet_TCP_Accept (server);
-    cout << "Server are open!" << endl;
+    cout << "Server wurde auf Port 6699 geoeffnet!" << endl;
+    cout << "Warten auf Client!" << endl;
 
     while (client == NULL)
     {
         SDL_Delay (1000);
         client = SDLNet_TCP_Accept (server);
     }
-    cout << "Client are connect!" << endl;
+    cout << "Client hat Verbunden!" << endl;
 
 }
 
