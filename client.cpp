@@ -60,7 +60,7 @@ int CClient::Recive(bool b)
 
     int recive[2];
 
-    result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
+    result = SDLNet_TCP_Recv(client , &recive, sizeof(recive));
 
     Sint16 a = recive[0];
 
@@ -70,7 +70,7 @@ int CClient::Recive(bool b)
     return a;
 }
 
-void CClient::Send(Sint16 a, int b)
+void CClient::Send(Sint16 a, bool b)
 {
     /*int result;
 
@@ -90,9 +90,9 @@ void CClient::Send(Sint16 a, int b)
     x[0] = a;
     x[1] = b;
 
-    int  len=sizeof(b);
+    int  len=sizeof(x);
 
-    result = SDLNet_TCP_Send (client, &b, sizeof(b));
+    result = SDLNet_TCP_Send (client, &x, sizeof(x));
 
     if (result<len)
     {
