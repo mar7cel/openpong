@@ -60,7 +60,7 @@ void CServer::OpenServer()
 
 }
 
-int CServer::Recive()
+int CServer::Recive(bool b)
 {
     /*result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
 
@@ -69,16 +69,19 @@ int CServer::Recive()
     return b;*/
 
 
-    int recive[1];
+    int recive[2];
 
     result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
 
-    Sint16 b = recive[0];
+    Sint16 a = recive[0];
 
-    return b;
+    b = recive[1];
+
+
+    return a;
 }
 
-void CServer::Send(Sint16 a)
+void CServer::Send(Sint16 a, bool b)
 {
     /*int result;
 
@@ -94,8 +97,9 @@ void CServer::Send(Sint16 a)
     }*/
 
     int result;
-    int b[1];
-    b[0] = a;
+    int x[2];
+    x[0] = a;
+    x[1] = b;
 
     int  len=sizeof(b);
 
