@@ -52,11 +52,12 @@ void CClient::OpenClient()
 void CClient::Recive(Sint16 a, bool b)
 {
 
-    result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
+    char data[8];
+    result = SDLNet_TCP_Recv(client , &data, sizeof(data));
 
 
-    a=(Sint16) SDLNet_Read16(recive);
-    b=(bool) SDLNet_Read16(recive+4);
+    a=(Sint16) SDLNet_Read16(data);
+    b=(bool) SDLNet_Read16(data+4);
 }
 
 void CClient::Send(Sint16 a, bool b)
