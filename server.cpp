@@ -63,26 +63,27 @@ void CServer::OpenServer()
 
 void CServer::Recive(Sint16 a, bool b)
 {
-    char data[8];
-    result = SDLNet_TCP_Recv(client , &data, sizeof(data));
+    int array[1];
+    result = SDLNet_TCP_Recv(client , &array, sizeof(array));
+    a = array[0];
+    b = array[1];
 
-
-    a=(Sint16) SDLNet_Read16(data);
-    b=(bool) SDLNet_Read16(data+4);
+    //a=(Sint16) SDLNet_Read16(data);
+    //b=(Sint16) SDLNet_Read16(data+4);
 
     //return b;
 }
 
 void CServer::Send(Sint16 a, bool b)
 {
-    char data[8];
-    SDLNet_Write16((Uint16)a,data);
-    SDLNet_Write16((Uint16)b,data+4);
-    cout << data << endl;
+    int array[1];
+    //SDLNet_Write16((Uint16)a,data);
+    //SDLNet_Write16((Uint16)b,data+4);
+    array[0] = a;
+    array[1] = b;
+    int  len=sizeof(array);
 
-    int  len=sizeof(data);
-
-    result = SDLNet_TCP_Send (client, &data, sizeof(data));
+    result = SDLNet_TCP_Send (client, &array, sizeof(array));
 
     if (result<len)
     {
