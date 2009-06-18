@@ -237,18 +237,18 @@ void CPlayer::Control()
             Computer.x = WWIDTH - PWIDTH - RANDX;
         pComputer->SetPos(Computer.x,Computer.y);
     }
-    /*if(host == true)
+    if(pMenu->bServer)
     {
         Computer.x = server.Recive();
         pComputer->SetPos(Computer.x,Computer.y);
         server.Send(Player.x);
     }
-    if(guest == true)
+    if(pMenu->bClient)
     {
         client.Send(Computer.x);
         Player.x = client.Recive();
         pPlayer->SetPos(Player.x,Player.y);
-    }*/
+    }
 }
 
 bool CPlayer::Collision(SDL_Rect a , SDL_Rect b)
