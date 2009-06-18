@@ -23,8 +23,9 @@ CServer::CServer()
 }
 CServer::~CServer()
 {
+    SAFE_DELETE (remoteIP);
     SDLNet_TCP_Close(server);
-	SDLNet_Quit();
+    SDLNet_Quit();
 }
 
 
@@ -32,30 +33,31 @@ void CServer::OpenServer()
 {
 
     if (SDLNet_ResolveHost (&addr, NULL, 6699) < 0)
-        {
-            printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
-            SDLNet_Quit ();
-            exit (-1);
-        }
+    {
+        printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
+        SDLNet_Quit ();
+        exit (-1);
+    }
 
     server = SDLNet_TCP_Open (&addr);
 
     if (server == NULL)
-        {
-            printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
-            SDLNet_Quit ();
-            exit (-1);
-        }
+    {
+        printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
+        SDLNet_Quit ();
+        exit (-1);
+    }
 
     client = SDLNet_TCP_Accept (server);
-    cout << "Server are open!" << endl;
+    cout << "Server wurde auf Port 6699 geoeffnet!" << endl;
+    cout << "Warten auf Client!" << endl;
 
     while (client == NULL)
-        {
-            SDL_Delay (1000);
-            client = SDLNet_TCP_Accept (server);
-        }
-    cout << "Client are connect!" << endl;
+    {
+        SDL_Delay (1000);
+        client = SDLNet_TCP_Accept (server);
+    }
+    cout << "Client hat Verbunden!" << endl;
 
 }
 
@@ -78,8 +80,8 @@ void CServer::Send(Sint16 a)
 
     result = SDLNet_TCP_Send (client, &b, sizeof(int));
 
-    if(result<len)
-        {
-            printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
-        }
+    if (result<len)
+    {
+        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    }
 }
