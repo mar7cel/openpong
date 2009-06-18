@@ -49,7 +49,8 @@ void CClient::OpenClient()
     }
 }
 
-int CClient::Recive(bool b)
+//int CClient::Recive(bool b)
+void CClient::Recive(Sint16 a , bool b)
 {
 
     /*result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
@@ -62,12 +63,9 @@ int CClient::Recive(bool b)
 
     result = SDLNet_TCP_Recv(client , &recive, sizeof(recive));
 
-    Sint16 a = recive[0];
+    a = recive[0];
 
     b = recive[1];
-
-
-    return a;
 }
 
 void CClient::Send(Sint16 a, bool b)
