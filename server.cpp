@@ -76,8 +76,7 @@ int CServer::Recive(bool *b)
     Sint16 a = recive[0];
 
     *b = recive[1];
-    cout <<"B :" << b << endl;
-    cout <<"A :" << a << endl;
+
     return a;
 }
 
