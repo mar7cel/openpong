@@ -34,7 +34,6 @@ class CServer
                 IPaddress addr;
                 IPaddress *remoteIP;
                 int result;
-                int recive;
 };
 
 #endif // SERVER_HPP_INCLUDED

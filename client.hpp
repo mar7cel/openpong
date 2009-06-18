@@ -32,7 +32,6 @@ class CClient
                 TCPsocket server;
                 TCPsocket client;
                 IPaddress addr;
-                int recive;
                 int result;
 };
 

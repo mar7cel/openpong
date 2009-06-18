@@ -52,9 +52,17 @@ void CClient::OpenClient()
 int CClient::Recive()
 {
 
-    result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
+    /*result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
 
     Sint16 b = recive;
+
+    return b;*/
+
+    int recive[1];
+
+    result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
+
+    Sint16 b = recive[0];
 
     return b;
 }
