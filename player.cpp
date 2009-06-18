@@ -245,9 +245,9 @@ void CPlayer::Control()
     }
     if(pMenu->bClient)
     {
-        client.Send(Computer.x, release);
         client.Recive(Player.x, release);
         pPlayer->SetPos(Player.x,Player.y);
+        client.Send(Computer.x, release);
     }
 }
 
