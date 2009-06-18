@@ -26,7 +26,7 @@ class CClient
                 ~CClient();
                 void OpenClient();
                 int Recive(bool b);
-                void Send(Sint16 a, int b);
+                void Send(Sint16 a, bool b);
 
     private :
                 TCPsocket server;
