@@ -25,8 +25,8 @@ class CServer
                 CServer();
                 ~CServer();
                 void OpenServer();
-                int Recive();
-                void Send(Sint16 a);
+                int Recive(bool b);
+                void Send(Sint16 a, bool b);
 
     private :
                 TCPsocket server;

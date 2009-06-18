@@ -32,7 +32,7 @@ void CClient::OpenClient()
 //    cout << "Bitte ip des Servers Eingeben : "<< endl;
 //    cin >> s;
 
-    if (SDLNet_ResolveHost (&addr, "192.168.2.1", 6699) < 0)
+    if (SDLNet_ResolveHost (&addr, "192.168.2.3", 6699) < 0)
     {
         printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
         SDLNet_Quit ();
@@ -49,7 +49,7 @@ void CClient::OpenClient()
     }
 }
 
-int CClient::Recive()
+int CClient::Recive(bool b)
 {
 
     /*result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
@@ -58,16 +58,19 @@ int CClient::Recive()
 
     return b;*/
 
-    int recive[1];
+    int recive[2];
 
     result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
 
-    Sint16 b = recive[0];
+    Sint16 a = recive[0];
 
-    return b;
+    b = recive[1];
+
+
+    return a;
 }
 
-void CClient::Send(Sint16 a)
+void CClient::Send(Sint16 a, int b)
 {
     /*int result;
 
@@ -83,8 +86,9 @@ void CClient::Send(Sint16 a)
     }*/
 
     int result;
-    int b[1];
-    b[0] = a;
+    int x[2];
+    x[0] = a;
+    x[1] = b;
 
     int  len=sizeof(b);
 
