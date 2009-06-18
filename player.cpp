@@ -239,14 +239,14 @@ void CPlayer::Control()
     }
     if(pMenu->bServer)
     {
-        Computer.x = server.Recive();
+        server.Recive(Computer.x , release);
         pComputer->SetPos(Computer.x,Computer.y);
-        server.Send(Player.x);
+        server.Send(Player.x, release);
     }
     if(pMenu->bClient)
     {
-        client.Send(Computer.x);
-        Player.x = client.Recive();
+        client.Send(Computer.x, release);
+        client.Recive(Player.x, release);
         pPlayer->SetPos(Player.x,Player.y);
     }
 }
