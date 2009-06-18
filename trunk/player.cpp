@@ -207,6 +207,7 @@ void CPlayer::Control()
             }
         }
 
+
     }
 
     if (left_pressed_p1)
@@ -237,18 +238,18 @@ void CPlayer::Control()
             Computer.x = WWIDTH - PWIDTH - RANDX;
         pComputer->SetPos(Computer.x,Computer.y);
     }
-    if(pMenu->bServer)
+    /*if(host == true)
     {
-        server.Recive(Computer.x , release);
+        Computer.x = server.Recive();
         pComputer->SetPos(Computer.x,Computer.y);
-        server.Send(Player.x, release);
+        server.Send(Player.x);
     }
-    if(pMenu->bClient)
+    if(guest == true)
     {
-        client.Recive(Player.x, release);
+        client.Send(Computer.x);
+        Player.x = client.Recive();
         pPlayer->SetPos(Player.x,Player.y);
-        client.Send(Computer.x, release);
-    }
+    }*/
 }
 
 bool CPlayer::Collision(SDL_Rect a , SDL_Rect b)
@@ -407,6 +408,7 @@ void CPlayer::AI()
         pMenu->AI_easy = true;
     }
 
+
     static int decision;
 
     static int last_speed = i_Ball_Speed_Y;
@@ -460,5 +462,3 @@ void CPlayer::AI()
 
     pComputer->SetPos(Computer.x,Computer.y);
 }
-
-
