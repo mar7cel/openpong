@@ -52,7 +52,6 @@ void CClient::OpenClient()
 
 void CClient::Recive(Sint16 a, bool b)
 {
-
     int array[1];
     result = SDLNet_TCP_Recv(client , &array, sizeof(array));
     a = array[0];
@@ -66,12 +65,6 @@ void CClient::Send(Sint16 a, bool b)
     //SDLNet_Write16((Uint16)b,data+4);
     array[0] = a;
     array[1] = b;
-    int  len=sizeof(array);
 
     result = SDLNet_TCP_Send (client, &array, sizeof(array));
-
-    if (result<len)
-    {
-        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
-    }
 }
