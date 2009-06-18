@@ -25,8 +25,8 @@ class CServer
                 CServer();
                 ~CServer();
                 void OpenServer();
-                void Recive(Sint16 a, bool b);
-                void Send(Sint16 a, bool b);
+                int Recive();
+                void Send(Sint16 a);
 
     private :
                 TCPsocket server;
@@ -34,7 +34,7 @@ class CServer
                 IPaddress addr;
                 IPaddress *remoteIP;
                 int result;
-                char recive;
+                int recive;
 };
 
 #endif // SERVER_HPP_INCLUDED
