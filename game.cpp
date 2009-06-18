@@ -81,7 +81,7 @@ void CGame::Play()
         pFramework->Clear();
         m_Player.Render();
         m_Player.Control();
-        if(pMenu-> AI == true)
+        if(pMenu-> AI)
         {
             m_Player.AI();
         }

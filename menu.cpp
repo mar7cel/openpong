@@ -117,8 +117,8 @@ void CMenu::MainMenu()
     }
     if ((yCursor == pos3) && (aktiv == true))
     {
-        multiplayer = false;
-        main = true;
+        multiplayer = true;
+        main = false;
     }
     if ((yCursor == pos4) && (aktiv == true))
     {
@@ -252,6 +252,7 @@ void CMenu::Multiplayer()
     {
         start = true;
         bServer = true;
+        pFramework->Text("Warten auf Client", 360,pos1);
     }
     if ((yCursor == pos2) && (aktiv == true))
     {
@@ -389,6 +390,8 @@ void CMenu::Control()
             break;
         }
     }*/
+
+
 }//Ende Control
 
 void CMenu::Quit()
