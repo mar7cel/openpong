@@ -49,16 +49,29 @@ void CClient::OpenClient()
     }
 }
 
-int CClient::Recive()
+void CClient::Recive(Sint16 a, bool b)
 {
 
-    result = SDLNet_TCP_Recv (client, &recive , sizeof(int));
-    Sint16 b = recive;
-    return b;
+    result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
+
+
+    a=(Sint16) SDLNet_Read16(recive);
+    b=(bool) SDLNet_Read16(recive+4);
 }
 
-void CClient::Send(Sint16 a)
+void CClient::Send(Sint16 a, bool b)
 {
-    int b = a;
-    result = SDLNet_TCP_Send(client, &b, sizeof(int));
+    char data[8];
+    SDLNet_Write16((Uint16)a,data);
+    SDLNet_Write16((Uint16)b,data+4);
+    cout << data << endl;
+
+    int  len=sizeof(data);
+
+    result = SDLNet_TCP_Send (client, &data, sizeof(data));
+
+    if (result<len)
+    {
+        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    }
 }
