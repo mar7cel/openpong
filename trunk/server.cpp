@@ -23,9 +23,8 @@ CServer::CServer()
 }
 CServer::~CServer()
 {
-    SAFE_DELETE (remoteIP);
     SDLNet_TCP_Close(server);
-    SDLNet_Quit();
+	SDLNet_Quit();
 }
 
 
@@ -33,60 +32,54 @@ void CServer::OpenServer()
 {
 
     if (SDLNet_ResolveHost (&addr, NULL, 6699) < 0)
-    {
-        printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
-        SDLNet_Quit ();
-        exit (-1);
-    }
+        {
+            printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
+            SDLNet_Quit ();
+            exit (-1);
+        }
 
     server = SDLNet_TCP_Open (&addr);
 
     if (server == NULL)
-    {
-        printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
-        SDLNet_Quit ();
-        exit (-1);
-    }
+        {
+            printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
+            SDLNet_Quit ();
+            exit (-1);
+        }
 
     client = SDLNet_TCP_Accept (server);
-    cout << "Server wurde auf Port 6699 geoeffnet!" << endl;
-    cout << "Warten auf Client!" << endl;
+    cout << "Server are open!" << endl;
 
     while (client == NULL)
-    {
-        SDL_Delay (1000);
-        client = SDLNet_TCP_Accept (server);
-    }
-    cout << "Client hat Verbunden!" << endl;
+        {
+            SDL_Delay (1000);
+            client = SDLNet_TCP_Accept (server);
+        }
+    cout << "Client are connect!" << endl;
 
 }
 
-void CServer::Recive(Sint16 a, bool b)
+int CServer::Recive()
 {
-    int array[1];
-    result = SDLNet_TCP_Recv(client , &array, sizeof(array));
-    a = array[0];
-    b = array[1];
+    result = SDLNet_TCP_Recv(client , &recive, sizeof(int));
 
-    //a=(Sint16) SDLNet_Read16(data);
-    //b=(Sint16) SDLNet_Read16(data+4);
+    Sint16 b = recive;
 
-    //return b;
+    return b;
 }
 
-void CServer::Send(Sint16 a, bool b)
+void CServer::Send(Sint16 a)
 {
-    int array[1];
-    //SDLNet_Write16((Uint16)a,data);
-    //SDLNet_Write16((Uint16)b,data+4);
-    array[0] = a;
-    array[1] = b;
-    int  len=sizeof(array);
+    int result;
 
-    result = SDLNet_TCP_Send (client, &array, sizeof(array));
+    int b = a;
 
-    if (result<len)
-    {
-        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
-    }
+    int  len=sizeof(b);
+
+    result = SDLNet_TCP_Send (client, &b, sizeof(int));
+
+    if(result<len)
+        {
+            printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+        }
 }
