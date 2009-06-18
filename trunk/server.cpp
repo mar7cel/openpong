@@ -71,13 +71,26 @@ int CServer::Recive()
 
 void CServer::Send(Sint16 a)
 {
-    int result;
+    /*int result;
 
     int b = a;
 
     int  len=sizeof(b);
 
     result = SDLNet_TCP_Send (client, &b, sizeof(int));
+
+    if (result<len)
+    {
+        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    }*/
+
+    int result;
+    int b[1];
+    b[0] = a;
+
+    int  len=sizeof(b);
+
+    result = SDLNet_TCP_Send (client, &b, sizeof(b));
 
     if (result<len)
     {
