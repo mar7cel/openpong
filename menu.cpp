@@ -99,7 +99,7 @@ void CMenu::MainMenu()
     pFramework->Text("Open Pong", 360,80);
     pFramework->Text("Singelplayer", 350,pos1);
     pFramework->Text("Player vs. Bot", 350,pos2);
-    pFramework->Text("Multiplayer geht noch nicht", 350,pos3);
+    pFramework->Text("Multiplayer", 350,pos3);
     pFramework->Text("Optionen", 350,pos4);
     pFramework->Text("Exit", 350,pos5);
 
