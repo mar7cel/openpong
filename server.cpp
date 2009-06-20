@@ -108,12 +108,11 @@ void CServer::Send(Sint16 a, bool b)
     }
 }
 
-void CServer::SendSettings(int a, int b)
+void CServer::SendSettings(int a)
 {
     int result;
-    int x[2];
+    int x[1];
     x[0] = a;
-    x[1] = b;
 
     int  len=sizeof(x);
 
