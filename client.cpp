@@ -26,13 +26,13 @@ CClient::~CClient()
     SDLNet_Quit();
 }
 
-void CClient::OpenClient()
+void CClient::OpenClient(char *s)
 {
 //    char *s;
 //    cout << "Bitte ip des Servers Eingeben : "<< endl;
 //    cin >> s;
-
-    if (SDLNet_ResolveHost (&addr, "192.168.2.3", 6699) < 0)
+    cout << "IP : " << s << endl;
+    if (SDLNet_ResolveHost (&addr,s, 6699) < 0)
     {
         printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
         SDLNet_Quit ();

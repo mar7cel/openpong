@@ -36,6 +36,7 @@ CMenu::CMenu()
     iSpeed = 0;
     bServer = false;
     bClient = false;
+    ip = false;
 }
 CMenu::~CMenu()
 {
@@ -78,7 +79,7 @@ void CMenu::Render()
     else if (multiplayer == true)
     {
         Multiplayer();
-        lastpos = pos2;
+        lastpos = pos3;
     }
     else if (option == true)
     {
@@ -205,31 +206,31 @@ void CMenu::Option()
     }
     aktiv = false;
 
-    if(fullscreen == true)
+    if (fullscreen == true)
     {
         pFramework->Text("AKTIV",600,pos0);
     }
-    else if(!fullscreen)
+    else if (!fullscreen)
     {
         pFramework->Text("AKTIV",600,pos1);
     }
-    if(AI_easy == true || (!AI_easy && !AI_hard))
+    if (AI_easy == true || (!AI_easy && !AI_hard))
     {
         pFramework->Text("AKTIV",600,pos2);
     }
-    else if(AI_hard == true)
+    else if (AI_hard == true)
     {
         pFramework->Text("AKTIV",600,pos3);
     }
-    if(iSpeed == 0)
+    if (iSpeed == 0)
     {
         pFramework->Text("AKTIV",600,pos4);
     }
-    else if(iSpeed == 5)
+    else if (iSpeed == 5)
     {
         pFramework->Text("AKTIV",600,pos5);
     }
-    else if(iSpeed == 10)
+    else if (iSpeed == 10)
     {
         pFramework->Text("AKTIV",600,pos6);
     }
@@ -246,6 +247,7 @@ void CMenu::Multiplayer()
     pFramework->Text("Multiplayer", 360,80);
     pFramework->Text("Host a Game", 360,pos1);
     pFramework->Text("Connect to a Game", 360,pos2);
+    pFramework->Text("Zurueck", 360,pos3);
     pCursor->SetPos(300,yCursor);
 
     if ((yCursor == pos1) && (aktiv == true))
@@ -256,9 +258,16 @@ void CMenu::Multiplayer()
     }
     if ((yCursor == pos2) && (aktiv == true))
     {
-        start = true;
-        bClient = true;
+        //start = true;
+        //bClient = true;
+        ip = true;
     }
+    if ((yCursor == pos3) && (aktiv == true))
+    {
+        multiplayer = false;
+        main = true;
+    }
+    aktiv = false;
 }
 
 //Exit
@@ -373,26 +382,68 @@ void CMenu::Control()
     {
         return_pressed = false;
     }
-    /*string a = SDL_GetKeyName(g_Event.key.keysym.sym);
-    if(bClient == false)
-    {
-    switch (g_Event.type)
-        {
-      	case SDL_KEYDOWN:
-              key = false;
-            break;
-        case SDL_KEYUP:
-              if(key == false)
-              {
-                  a += a;
-                  key = true;
-              }
-            break;
-        }
-    }*/
 
+    if (ip == true)
+    {
+        pFramework->Clear();
+        pBack->Render();
+        pFramework->Text("Multiplayer", 360,80);
+        pFramework->Text("Bitte IP des Servers Eingeben!", 300,pos1);
+        pFramework->Flip();
+        int len=0,old;
+        int done=0,i;
+        for (i=0;i<101;i++)
+		str[i]=0;
+        while (!done)
+        {
+            while (SDL_PollEvent(&g_Event))
+            {
+                if (g_Event.type == SDL_KEYDOWN)
+                {
+                    old = len;
+                    if (g_Event.key.keysym.sym == SDLK_RETURN)
+                    {
+                        done=1;
+                    }
+                    else if ((g_Event.key.keysym.sym <= 57 && g_Event.key.keysym.sym >= 48) ||
+                             g_Event.key.keysym.sym == 46 ||
+                             (g_Event.key.keysym.sym <= 90 && g_Event.key.keysym.sym >= 65) ||
+                             (g_Event.key.keysym.sym <= 122 && g_Event.key.keysym.sym >= 97))
+                    {
+                        str[len]=g_Event.key.keysym.sym;
+                        len++;
+                    }
+                    else if (g_Event.key.keysym.sym == SDLK_SEMICOLON && (KMOD_RSHIFT || KMOD_LSHIFT))
+                    {
+                        str[len]=58;
+                        len++;
+                    }
+                    else if (g_Event.key.keysym.sym == SDLK_BACKSPACE)
+                    {
+                        len--;
+                        str[len]=0;
+                    }
+                    if (len>=100) len=100;
+                    if (old!=len)
+                    {
+
+                        pFramework->Clear();
+                        pBack->Render();
+                        pFramework->Text("Multiplayer", 360,80);
+                        pFramework->Text("Bitte IP des Servers Eingeben!", 300,pos1);
+                        pFramework->Text(str, 300 , pos3);
+                        pFramework->Flip();
+                    }
+                }
+
+            }
+        }
+        start = true;
+        bClient = true;
+    }
 
 }//Ende Control
+
 
 void CMenu::Quit()
 {

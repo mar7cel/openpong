@@ -100,7 +100,7 @@ void CPlayer::Init()
     }
     if (pMenu->bClient)
     {
-        client.OpenClient();
+        client.OpenClient(pMenu->str);
     }
 
     i_Ball_Speed_Y = 10 +pMenu->iSpeed;
