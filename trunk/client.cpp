@@ -98,17 +98,15 @@ void CClient::Send(Sint16 a, bool b)
     }
 }
 
-void CClient::ReciveSettings(int *a, int *b)
+void CClient::ReciveSettings(int *a)
 {
-    int recive[2];
+    int recive[1];
 
     int  len=sizeof(recive);
 
     result = SDLNet_TCP_Recv(client , &recive, sizeof(recive));
 
     *a = recive[0];
-
-    *b = recive[1];
 
     if (result<len)
     {

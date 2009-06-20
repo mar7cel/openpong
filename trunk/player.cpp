@@ -107,11 +107,12 @@ void CPlayer::Init()
 
     if(pMenu->bServer)
     {
-       server.SendSettings(i_Ball_Speed_Y , i_Ball_Speed_X);
+       server.SendSettings(i_Ball_Speed_Y);
+       cout << "Einstellungen wurden gesendet" << endl;
     }
     if(pMenu->bClient)
     {
-       client.ReciveSettings(&i_Ball_Speed_Y , &i_Ball_Speed_X);
+       client.ReciveSettings(&i_Ball_Speed_Y);
     }
 
 
