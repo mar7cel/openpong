@@ -238,7 +238,8 @@ void CPlayer::Control()
     }
     if(pMenu->bServer)
     {
-        Computer.x = server.Recive(&release);
+        //Computer.x = server.Recive(&release);
+        server.Recive(&Computer.x,&release);
         pComputer->SetPos(Computer.x,Computer.y);
         server.Send(Player.x,release);
         //release = true;
@@ -246,7 +247,8 @@ void CPlayer::Control()
     if(pMenu->bClient)
     {
         client.Send(Computer.x,release);
-        Player.x = client.Recive(&release);
+        //Player.x = client.Recive(&release);
+        client.Recive(&Player.x,&release);
         pPlayer->SetPos(Player.x,Player.y);
         //release = true;
     }
