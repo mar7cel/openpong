@@ -53,6 +53,7 @@ class CMenu     :   public OSingleton<CMenu>
                 int iSpeed;         //Ball y Geschwindigkeit
                 bool bServer;       //Server öffnen
                 bool bClient;       //Client starten
+                char str[101];
     private :
                 CSprite *pBack;     //Hintergrundbild
                 CSprite *pCursor;   //Cursorbild
@@ -65,7 +66,7 @@ class CMenu     :   public OSingleton<CMenu>
                 bool multiplayer;   // Welches Menü ist Aktiv
                 bool option;        // Welches Menü ist Aktiv
                 bool aktiv;         // Ist die Auswahl im Menü auch Aktiviert
-                bool key;
+                bool ip;
 };
 
 
