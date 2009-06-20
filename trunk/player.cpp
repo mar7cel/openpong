@@ -105,6 +105,16 @@ void CPlayer::Init()
 
     i_Ball_Speed_Y = 10 +pMenu->iSpeed;
 
+    if(pMenu->bServer)
+    {
+       server.SendSettings(i_Ball_Speed_Y , i_Ball_Speed_X);
+    }
+    if(pMenu->bClient)
+    {
+       client.ReciveSettings(&i_Ball_Speed_Y , &i_Ball_Speed_X);
+    }
+
+
 }
 
 //Render

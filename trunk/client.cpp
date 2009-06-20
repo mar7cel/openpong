@@ -97,3 +97,22 @@ void CClient::Send(Sint16 a, bool b)
         printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
     }
 }
+
+void CClient::ReciveSettings(int *a, int *b)
+{
+    int recive[2];
+
+    int  len=sizeof(recive);
+
+    result = SDLNet_TCP_Recv(client , &recive, sizeof(recive));
+
+    *a = recive[0];
+
+    *b = recive[1];
+
+    if (result<len)
+    {
+        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    }
+
+}

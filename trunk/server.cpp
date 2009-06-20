@@ -49,14 +49,14 @@ void CServer::OpenServer()
     }
 
     client = SDLNet_TCP_Accept (server);
-    cout << "Server are open!" << endl;
+    cout << "Server wurde Gestartet !" << endl;
 
     while (client == NULL)
     {
         SDL_Delay (1000);
         client = SDLNet_TCP_Accept (server);
     }
-    cout << "Client are connect!" << endl;
+    cout << "Client hat verbunden !" << endl;
 
 }
 
@@ -93,6 +93,23 @@ void CServer::Send(Sint16 a, bool b)
         printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
     }*/
 
+    int result;
+    int x[2];
+    x[0] = a;
+    x[1] = b;
+
+    int  len=sizeof(x);
+
+    result = SDLNet_TCP_Send (client, &x, sizeof(x));
+
+    if (result<len)
+    {
+        printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    }
+}
+
+void CServer::SendSettings(int a, int b)
+{
     int result;
     int x[2];
     x[0] = a;

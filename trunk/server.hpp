@@ -27,6 +27,7 @@ class CServer
                 void OpenServer();
                 void Recive(Sint16 *a,bool *b);
                 void Send(Sint16 a, bool b);
+                void SendSettings(int a, int b);
 
     private :
                 TCPsocket server;
