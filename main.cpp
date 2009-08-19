@@ -21,7 +21,10 @@ CGame game;
 int main ( int argc, char** argv )
 {
     game.Init();    //Spiel Initialisieren
-    game.Menu();    //Menu Starten
+    while (!pMenu->start)
+    {
+        game.Menu();    //Menu Starten
+    }
     //Solgange wie done == False ist läuft die Schleife
     while (!pFramework->done)
     {
