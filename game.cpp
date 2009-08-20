@@ -30,7 +30,7 @@ CGame::~CGame()
     pFramework->Quit();
     pFramework->Del();
 
-    pMenu->Quit();
+    //pMenu->Quit();
     pMenu->Del();
 }//~CGame ende
 

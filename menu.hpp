@@ -43,7 +43,7 @@ class CMenu     :   public OSingleton<CMenu>
                 void Multiplayer(); //Multiplayer Menü
                 void Option();      //Optionen für das Spiel
                 void Exit();        //Exit Menü
-                void Quit();        //Fährt alles im Menü wieder runter
+                //void Quit();        //Fährt alles im Menü wieder runter
                 bool start;         //Start
                 bool fullscreen;    //Fullscreen
                 bool exit;          //Exit
