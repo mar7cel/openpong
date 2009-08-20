@@ -93,6 +93,7 @@ void CMenu::Render()
 //Aufgabe:Erstellt das Hauptmenü
 void CMenu::MainMenu()
 {
+    pFramework->done = false;
     firstpos = pos1;
     if (yCursor > lastpos)
         yCursor = pos1;
@@ -423,6 +424,13 @@ void CMenu::Control()
                         len--;
                         str[len]=0;
                     }
+                    else if (g_Event.key.keysym.sym == SDLK_ESCAPE)
+                    {
+                        done = true;
+                        ip = false;
+                        main = true;
+                        return;
+                    }
                     if (len>=100) len=100;
                     if (old!=len)
                     {
@@ -447,6 +455,6 @@ void CMenu::Control()
 
 void CMenu::Quit()
 {
-    SAFE_DELETE (pBack);
-    SAFE_DELETE (pCursor);
+    //SAFE_DELETE (pBack);
+    //SAFE_DELETE (pCursor);
 }

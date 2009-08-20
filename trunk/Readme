@@ -34,3 +34,9 @@ Optionen	:
 			FullScreen on/off
 			KI leicht/schwer
 			Geschwindigkeit leicht/mittel/schwer
+
+Multiplayer	:	"Host a Game" -> erstellt einen Server auf dem Port 6699.
+			"Connect to a Game" -> erwartet die Eingabe einer IP adresse.
+			Die Adresse kann nicht über die "NUM" Tasten eingegeben werden.
+
+			

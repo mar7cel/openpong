@@ -89,4 +89,5 @@ void CGame::Play()
         iTimer = SDL_GetTicks();
         pFramework->Flip();
         }
+        pMenu->start = false;
 }//Play ende
