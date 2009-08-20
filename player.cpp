@@ -155,6 +155,8 @@ void CPlayer::Control()
                 {
                     SDL_WM_ToggleFullScreen(pScreen);
                 }
+                iPlayerPoint = 0;
+                iCpuPoint = 0;
                 pFramework->done = true;
                 return;
             }
