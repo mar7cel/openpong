@@ -109,13 +109,13 @@ void CMenu::MainMenu()
     if ((yCursor == pos1) && (aktiv == true))
     {
         start = true;
-        Quit();
+        //Quit();
     }
     if ((yCursor == pos2) && (aktiv == true))
     {
         start = true;
         AI = true;
-        Quit();
+        //Quit();
     }
     if ((yCursor == pos3) && (aktiv == true))
     {
@@ -453,8 +453,8 @@ void CMenu::Control()
 }//Ende Control
 
 
-void CMenu::Quit()
+/*void CMenu::Quit()
 {
-    //SAFE_DELETE (pBack);
-    //SAFE_DELETE (pCursor);
-}
+    SAFE_DELETE (pBack);
+    SAFE_DELETE (pCursor);
+}*/

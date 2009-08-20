@@ -105,14 +105,14 @@ void CPlayer::Init()
 
     i_Ball_Speed_Y = 10 +pMenu->iSpeed;
 
-    if(pMenu->bServer)
+    if (pMenu->bServer)
     {
-       server.SendSettings(i_Ball_Speed_Y);
-       cout << "Einstellungen wurden gesendet" << endl;
+        server.SendSettings(i_Ball_Speed_Y);
+        cout << "Einstellungen wurden gesendet" << endl;
     }
-    if(pMenu->bClient)
+    if (pMenu->bClient)
     {
-       client.ReciveSettings(&i_Ball_Speed_Y);
+        client.ReciveSettings(&i_Ball_Speed_Y);
     }
 
 
@@ -157,6 +157,7 @@ void CPlayer::Control()
                 }
                 iPlayerPoint = 0;
                 iCpuPoint = 0;
+                pMenu->AI = false;
                 pFramework->done = true;
                 return;
             }
@@ -249,7 +250,7 @@ void CPlayer::Control()
         if (Computer.x > WWIDTH - PWIDTH - RANDX)
             Computer.x = WWIDTH - PWIDTH - RANDX;
     }
-    if(pMenu->bServer)
+    if (pMenu->bServer)
     {
         //Computer.x = server.Recive(&release);
         server.Recive(&Computer.x,&release);
@@ -257,7 +258,7 @@ void CPlayer::Control()
         server.Send(Player.x,release);
         //release = true;
     }
-    if(pMenu->bClient)
+    if (pMenu->bClient)
     {
         client.Send(Computer.x,release);
         //Player.x = client.Recive(&release);
@@ -407,18 +408,18 @@ void CPlayer::AI()
     ipaddle_center_cpu = Computer.x + Computer.w / 2;
     iball_center = Ball.x + Ball.w / 2;
 
-    if(pMenu->AI_hard == true)
+    if (pMenu->AI_hard == true)
     {
         ipaddle_rand = 10;
         iball_y = 0;
     }
-    if(pMenu->AI_easy == true)
+    if (pMenu->AI_easy == true)
     {
         ipaddle_rand = 10;
         iball_y = 150;
     }
 
-    if(!pMenu->AI_easy && !pMenu->AI_hard)
+    if (!pMenu->AI_easy && !pMenu->AI_hard)
     {
         pMenu->AI_easy = true;
     }
