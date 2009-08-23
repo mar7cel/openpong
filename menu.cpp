@@ -246,8 +246,8 @@ void CMenu::Multiplayer()
         yCursor = pos1;
     firstpos = pos1;
     pFramework->Text("Multiplayer", 360,80);
-    pFramework->Text("Host a Game", 360,pos1);
-    pFramework->Text("Connect to a Game", 360,pos2);
+    pFramework->Text("Server Starten", 360,pos1);
+    pFramework->Text("Zum Server Verbinden", 360,pos2);
     pFramework->Text("Zurueck", 360,pos3);
     pCursor->SetPos(300,yCursor);
 
@@ -277,6 +277,8 @@ void CMenu::Exit()
 {
     firstpos = pos1;
     if (yCursor > pos2)
+        yCursor = pos1;
+    if (yCursor < pos1)
         yCursor = pos1;
     pFramework->Text("Wirklich beenden ??", 225,80);
     pFramework->Text("Ja", 350,pos1);

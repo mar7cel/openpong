@@ -151,13 +151,11 @@ void CPlayer::Control()
         {
             if (g_Event.key.keysym.sym == SDLK_ESCAPE)
             {
-                if (pMenu->fullscreen == true)
-                {
-                    SDL_WM_ToggleFullScreen(pScreen);
-                }
                 iPlayerPoint = 0;
                 iCpuPoint = 0;
                 pMenu->AI = false;
+                i_Ball_Speed_X = 0;
+                release = false;
                 pFramework->done = true;
                 return;
             }
