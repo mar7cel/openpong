@@ -98,8 +98,8 @@ void CMenu::MainMenu()
     if (yCursor > lastpos)
         yCursor = pos1;
     pFramework->Text("Open Pong", 360,80);
-    pFramework->Text("Singelplayer", 350,pos1);
-    pFramework->Text("Player vs. Bot", 350,pos2);
+    pFramework->Text("Einzelspieler", 350,pos1);
+    pFramework->Text("Spieler vs. Bot", 350,pos2);
     pFramework->Text("Multiplayer", 350,pos3);
     pFramework->Text("Optionen", 350,pos4);
     pFramework->Text("Exit", 350,pos5);
@@ -147,12 +147,12 @@ void CMenu::Option()
         yCursor = pos0;
 
     pFramework->Text("Optionen", 370,80);
-    pFramework->Text("FullScreen", 250,pos0);
+    pFramework->Text("Vollbild", 250,pos0);
     pFramework->Text("Ja", 500,pos0);
     pFramework->Text("Nein", 500,pos1);
     pFramework->Text("Computer KI", 250,pos2);
-    pFramework->Text("Easy", 500,pos2);
-    pFramework->Text("Hard", 500,pos3);
+    pFramework->Text("Leicht", 500,pos2);
+    pFramework->Text("Schwer", 500,pos3);
     pFramework->Text("Ball Geschwindigkeit", 250,pos4);
     pFramework->Text("Normal", 500,pos4);
     pFramework->Text("Mittel", 500,pos5);
