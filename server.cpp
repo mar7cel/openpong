@@ -50,14 +50,28 @@ void CServer::OpenServer()
 
     client = SDLNet_TCP_Accept (server);
     cout << "Server wurde Gestartet !" << endl;
-
+    int x = 0;
     while (client == NULL)
-    {
-        SDL_Delay (1000);
-        client = SDLNet_TCP_Accept (server);
-    }
-    cout << "Client hat verbunden !" << endl;
+        {
+            x++;
+            SDL_Delay (1000);
+            client = SDLNet_TCP_Accept (server);
+            if(x == 10)
+            {
+                pMenu->start = false;
+                pMenu->bServer = false;
+                pFramework->done = true;
+                SAFE_DELETE (remoteIP);
+                SDLNet_TCP_Close(server);
+                SDLNet_Quit();
+                cout << "Server wurde Beendet !" << endl;
+                cout << "STart : " << pMenu->start << endl;
 
+                return;
+            }
+
+        }
+    cout << "Client hat verbunden !" << endl;
 }
 
 void CServer::Recive(Sint16 *a, bool *b)
