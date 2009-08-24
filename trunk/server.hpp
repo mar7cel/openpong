@@ -18,6 +18,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 #define SERVER_HPP_INCLUDED
 
 #include "framework.hpp"
+#include "menu.hpp"
 
 class CServer
 {

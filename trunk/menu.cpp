@@ -257,6 +257,7 @@ void CMenu::Multiplayer()
         bServer = true;
         pFramework->Text("Warten auf Client", 360,pos1);
     }
+
     if ((yCursor == pos2) && (aktiv == true))
     {
         //start = true;
@@ -430,7 +431,6 @@ void CMenu::Control()
                     {
                         done = true;
                         ip = false;
-                        main = true;
                         return;
                     }
                     if (len>=100) len=100;

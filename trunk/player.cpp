@@ -154,6 +154,7 @@ void CPlayer::Control()
                 iPlayerPoint = 0;
                 iCpuPoint = 0;
                 pMenu->AI = false;
+                pMenu->start = false;
                 i_Ball_Speed_X = 0;
                 release = false;
                 pFramework->done = true;
@@ -254,6 +255,7 @@ void CPlayer::Control()
         server.Recive(&Computer.x,&release);
         pComputer->SetPos(Computer.x,Computer.y);
         server.Send(Player.x,release);
+
         //release = true;
     }
     if (pMenu->bClient)
@@ -277,7 +279,7 @@ bool CPlayer::Collision(SDL_Rect a , SDL_Rect b)
 //Aufgabe:Ball Bewegen
 void CPlayer::MoveBall()
 {
-    if ( release == false)
+    if (release == false)
     {
         pFramework->Text("Space Taste drücken zum Spielen!",280,200);
     }
