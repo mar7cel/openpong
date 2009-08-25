@@ -19,8 +19,11 @@ Benötigte Libs	:
 			libSDL_net-1.2
 			libSDL_ttf-2.0
 
+Kompilieren	:	
+			Zum Kompilieren einfach die makefile ausführen.
+
 Steuerung	:	
-			Im Singelplayer Modus Steuert man die beiden Spieler
+			Im Einzelspieler Modus Steuert man die beiden Spieler
 			über die Tastatur.
 			Spieler 1 : LEFT , RIGHT
 			Spieler 2 : A , D
@@ -35,7 +38,8 @@ Optionen	:
 			KI leicht/schwer
 			Geschwindigkeit leicht/mittel/schwer
 
-Multiplayer	:	"Host a Game" -> erstellt einen Server auf dem Port 6699.
+Multiplayer	:	
+			"Host a Game" -> erstellt einen Server auf dem Port 6699.
 			"Connect to a Game" -> erwartet die Eingabe einer IP adresse.
 			Die Adresse kann nicht über die "NUM" Tasten eingegeben werden.
 

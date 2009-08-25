@@ -60,7 +60,9 @@ bool CFramework::Init(int iScreenWidth, int iScreenHeight,
         printf("TTF_Init: %s\n", TTF_GetError());
         exit(2);
     }
+
     LoadFont("gfx/font/font.ttf",15);
+
     done = false;
     return (true);
 } // Init Ende
@@ -108,7 +110,7 @@ void CFramework::LoadFont(const string sFilename, int size)
 //Aufgabe:Darstellen des Textes
 void CFramework::Text(string text, int iPosX, int iPosY)
 {
-    SDL_Color foreground  = {0,255,0};
+    SDL_Color foreground  = {0,255,255};
     SDL_Color background  = {0,0,0};
 
     temp = TTF_RenderText_Shaded(pFont, text.c_str(), foreground, background);

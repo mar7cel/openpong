@@ -65,8 +65,6 @@ void CServer::OpenServer()
                 SDLNet_TCP_Close(server);
                 SDLNet_Quit();
                 cout << "Server wurde Beendet !" << endl;
-                cout << "STart : " << pMenu->start << endl;
-
                 return;
             }
 
