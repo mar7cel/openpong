@@ -46,12 +46,13 @@ void CGame::Init()
     }
     //Setzt die Fenster Beschriftung
     SDL_WM_SetCaption(WCAPTION, 0);
+    SDL_WM_SetIcon(SDL_LoadBMP("gfx/icon.bmp"), NULL);
     //Timer für das Spiel
     iTimer = SDL_GetTicks();
     //Menu Initialisieren
     pMenu->Init();
     pMenu->fullscreen = fullscreen;
-
+    SDL_ShowCursor(SDL_DISABLE);
     cout << "Spiel Initialisiert !" << endl;
 }//Init ende
 

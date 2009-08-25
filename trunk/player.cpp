@@ -177,6 +177,7 @@ void CPlayer::Control()
             }
             if (g_Event.key.keysym.sym == SDLK_n && (iPlayerPoint > 9 || iCpuPoint > 9))
             {
+                pMenu->AI = false;
                 pFramework->done = true;
                 return;
             }
