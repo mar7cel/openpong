@@ -93,11 +93,19 @@ void CMenu::Render()
 //Aufgabe:Erstellt das Hauptmenü
 void CMenu::MainMenu()
 {
+    LoadSetting();
+    if(bname == false)
+    {
+        InputName();
+        bname = true;
+    }
     pFramework->done = false;
     firstpos = pos1;
     if (yCursor > lastpos)
         yCursor = pos1;
     pFramework->Text("Open Pong", 360,80);
+    pFramework->Text("Wilkommen ", 320,105);
+    pFramework->Text(name, 420,105);
     pFramework->Text("Einzelspieler", 350,pos1);
     pFramework->Text("Spieler vs. Bot", 350,pos2);
     pFramework->Text("Multiplayer", 350,pos3);
@@ -204,6 +212,7 @@ void CMenu::Option()
     {
         main = true;
         option = false;
+        SaveSetting();
     }
     aktiv = false;
 
@@ -235,7 +244,6 @@ void CMenu::Option()
     {
         pFramework->Text("AKTIV",600,pos6);
     }
-
 }
 
 //Multiplayer
@@ -397,7 +405,7 @@ void CMenu::Control()
         int len=0,old;
         int done=0,i;
         for (i=0;i<101;i++)
-		str[i]=0;
+            str[i]=0;
         while (!done)
         {
             while (SDL_PollEvent(&g_Event))
@@ -405,14 +413,10 @@ void CMenu::Control()
                 if (g_Event.type == SDL_KEYDOWN)
                 {
                     old = len;
-                    if (g_Event.key.keysym.sym == SDLK_RETURN)
-                    {
-                        done=1;
-                    }
-                    else if ((g_Event.key.keysym.sym <= 57 && g_Event.key.keysym.sym >= 48) ||
-                             g_Event.key.keysym.sym == 46 ||
-                             (g_Event.key.keysym.sym <= 90 && g_Event.key.keysym.sym >= 65) ||
-                             (g_Event.key.keysym.sym <= 122 && g_Event.key.keysym.sym >= 97))
+                    if ((g_Event.key.keysym.sym <= 57 && g_Event.key.keysym.sym >= 48) ||
+                            g_Event.key.keysym.sym == 46 ||
+                            (g_Event.key.keysym.sym <= 90 && g_Event.key.keysym.sym >= 65) ||
+                            (g_Event.key.keysym.sym <= 122 && g_Event.key.keysym.sym >= 97))
                     {
                         str[len]=g_Event.key.keysym.sym;
                         len++;
@@ -433,6 +437,13 @@ void CMenu::Control()
                         ip = false;
                         return;
                     }
+                    else if (g_Event.key.keysym.sym == SDLK_RETURN)
+                    {
+                        if (len > 0)
+                        {
+                            done=1;
+                        }
+                    }
                     if (len>=100) len=100;
                     if (old!=len)
                     {
@@ -443,6 +454,7 @@ void CMenu::Control()
                         pFramework->Text("Bitte IP des Servers Eingeben!", 300,pos1);
                         pFramework->Text(str, 300 , pos3);
                         pFramework->Flip();
+
                     }
                 }
 
@@ -454,6 +466,103 @@ void CMenu::Control()
 
 }//Ende Control
 
+void CMenu::SaveSetting()
+{
+    //char name[] = "Mary";
+    FILE *setting;
+    setting = fopen("setting.txt", "w");
+    fprintf(setting, "%d %d %d %d %s\n", fullscreen, AI_easy, AI_hard, iSpeed, name);
+    fclose(setting);
+}
+void CMenu::LoadSetting()
+{
+
+    FILE *setting = fopen("setting.txt", "r");
+    if (setting != NULL)
+    {
+        int f,e,h;
+        fscanf(setting, "%d %d %d %d %s\n", &f, &e, &h, &iSpeed,name);
+
+        if (f > 0 && fullscreen == false)
+        {
+            fullscreen = true;
+            pScreen = pFramework->GetScreen();
+            SDL_WM_ToggleFullScreen(pScreen);
+        }
+        if (e > 0)
+        {
+            AI_easy = true;
+        }
+        else
+        {
+            AI_hard = true;
+        }
+        bname = true;
+
+        fclose(setting);
+    }
+}
+
+void CMenu::InputName()
+{
+        pFramework->Clear();
+        pBack->Render();
+        pFramework->Text("Wilkommen bei OpenPong", 300,80);
+        pFramework->Text("Bitte Spielername eingeben", 300,pos1);
+        pFramework->Flip();
+        int len=0,old;
+        int done=0,i;
+        for (i=0;i<101;i++)
+            name[i]=0;
+        while (!done)
+        {
+            while (SDL_PollEvent(&g_Event))
+            {
+                if (g_Event.type == SDL_KEYDOWN)
+                {
+                    old = len;
+                    if ((g_Event.key.keysym.sym <= 57 && g_Event.key.keysym.sym >= 48) ||
+                            g_Event.key.keysym.sym == 46 ||
+                            (g_Event.key.keysym.sym <= 90 && g_Event.key.keysym.sym >= 65) ||
+                            (g_Event.key.keysym.sym <= 122 && g_Event.key.keysym.sym >= 97))
+                    {
+                        name[len]=g_Event.key.keysym.sym;
+                        len++;
+                    }
+                    else if (g_Event.key.keysym.sym == SDLK_SEMICOLON && (KMOD_RSHIFT || KMOD_LSHIFT))
+                    {
+                        name[len]=58;
+                        len++;
+                    }
+                    else if (g_Event.key.keysym.sym == SDLK_BACKSPACE)
+                    {
+                        len--;
+                        name[len]=0;
+                    }
+                    else if (g_Event.key.keysym.sym == SDLK_RETURN)
+                    {
+                        if (len > 0)
+                        {
+                            done=1;
+                        }
+                    }
+                    if (len>=100) len=100;
+                    if (old!=len)
+                    {
+
+                        pFramework->Clear();
+                        pBack->Render();
+                        pFramework->Text("Wilkommen bei OpenPong", 300,80);
+                        pFramework->Text("Bitte Spielername eingeben", 300,pos1);
+                        pFramework->Text(name, 300 , pos3);
+                        pFramework->Flip();
+
+                    }
+                }
+
+            }
+        }
+}
 
 /*void CMenu::Quit()
 {

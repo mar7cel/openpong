@@ -78,17 +78,22 @@ void CGame::Menu()
 void CGame::Play()
 {
     if ( (SDL_GetTicks() - iTimer) >= FRAME_RATE )
+    {
+        if (m_Player.bPause == true)
+            m_Player.Pause();
+        if (m_Player.bPause == false)
         {
-        pFramework->Clear();
-        m_Player.Render();
-        m_Player.Control();
-        if(pMenu-> AI)
-        {
-            m_Player.AI();
+            pFramework->Clear();
+            m_Player.Render();
+            m_Player.Control();
+            if (pMenu-> AI)
+            {
+                m_Player.AI();
+            }
+            m_Player.MoveBall();
+            iTimer = SDL_GetTicks();
+            pFramework->Flip();
         }
-        m_Player.MoveBall();
-        iTimer = SDL_GetTicks();
-        pFramework->Flip();
-        }
-        pMenu->start = false;
+    }
+    pMenu->start = false;
 }//Play ende

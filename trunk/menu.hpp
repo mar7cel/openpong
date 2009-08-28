@@ -54,6 +54,11 @@ class CMenu     :   public OSingleton<CMenu>
                 bool bServer;       //Server öffnen
                 bool bClient;       //Client starten
                 char str[101];
+                char name[100];
+                void SaveSetting();
+                void LoadSetting();
+                void InputName();
+                bool bname;
     private :
                 CSprite *pBack;     //Hintergrundbild
                 CSprite *pCursor;   //Cursorbild

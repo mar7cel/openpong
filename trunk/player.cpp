@@ -37,6 +37,7 @@ CPlayer::CPlayer()
     release = false;
     ipaddle_rand = 0;
     iball_y = 0;
+    bPause = false;
 }
 
 CPlayer::~CPlayer()
@@ -179,8 +180,18 @@ void CPlayer::Control()
             {
                 pMenu->AI = false;
                 pFramework->done = true;
+                iPlayerPoint = 0;
+                iCpuPoint = 0;
+                Reset();
                 return;
             }
+            if (g_Event.key.keysym.sym == SDLK_p && pMenu->bServer == false && pMenu->bClient == false)
+            {
+                pFramework->Text("Spiel Pausiert!",350,200);
+                bPause = true;
+                cout << "Spiel Pausiert" << endl;
+            }
+
             if (g_Event.key.keysym.sym == SDLK_SPACE && release == false)
             {
                 release = true;
@@ -300,12 +311,18 @@ void CPlayer::MoveBall()
 
         if (Ball.y > WHEIGHT)
         {
-            iPlayerPoint++;
+            if (iPlayerPoint < 11)
+            {
+                iPlayerPoint++;
+            }
             Reset();
         }
         if (Ball.y < 0)
         {
-            iCpuPoint++;
+            if(iCpuPoint < 11)
+            {
+                iCpuPoint++;
+            }
             Reset();
         }
 
@@ -373,7 +390,8 @@ void CPlayer::Points()
     string pla(p.str());
     string cpu(c.str());
 
-    pFramework->Text("Player 1 : "+pla, 10,10);
+    pFramework->Text(pMenu->name, 10,10);
+    pFramework->Text(pla, 10,30);
     pFramework->Text("Player 2 : "+cpu, 10,570);
 
     if (pMenu->bServer || pMenu->bClient)
@@ -387,7 +405,8 @@ void CPlayer::Points()
     }
     if (iPlayerPoint > 9)
     {
-        pFramework->Text("Player 1 hat Gewonnen! ", 10,10);
+        pFramework->Text(pMenu->name, 10,10);
+        pFramework->Text("hat Gewonnen! ", 10,30);
     }
     else if (iCpuPoint > 9)
     {
@@ -479,4 +498,16 @@ void CPlayer::AI()
         Computer.x = WWIDTH - PWIDTH - RANDX;
 }
 
+void CPlayer::Pause()
+{
+    if ( SDL_PollEvent(&g_Event) )
+    {
+        if (g_Event.type == SDL_KEYDOWN)
+        {
+            if (g_Event.key.keysym.sym == SDLK_p)
+                bPause = false;
+            cout << "Spiel geht weiter" << endl;
+        }
+    }
+}
 
