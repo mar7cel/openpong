@@ -35,12 +35,14 @@ class CPlayer
                 void MoveBall();        //Bewegt den Ball
                 void Reset();           //Resetet das Spiel
                 void Points();          //Berechnet Punkte der Spieler und gibt Sie aus
+                void Pause();           //Spiel Pausieren
                 void AI();              //Computer Gegner
                 short int i_Player;     //Anzahl der Spieler
                 int i_Ball_Speed_X;     //X Geschwindigkeit des Balles
                 int i_Ball_Speed_Y;     //Y Geschwindigkeit des Balles
                 CServer server;
                 CClient client;
+                bool bPause;
     private :
                 CSprite *pPlayer;       //Spieler Bild
                 CSprite *pComputer;     //Spieler Bild
