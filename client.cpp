@@ -45,7 +45,9 @@ void CClient::OpenClient(char *s)
     {
         printf ("ERR TCP_Open: %s\n", SDLNet_GetError ());
         SDLNet_Quit ();
-        exit (-1);
+        pMenu->start = false;
+        pMenu->bClient = false;
+        pFramework->done = true;
     }
 }
 
