@@ -36,7 +36,9 @@ void CClient::OpenClient(char *s)
     {
         printf ("ERR ResolveHost: %s\n", SDLNet_GetError ());
         SDLNet_Quit ();
-        exit (-1);
+        pMenu->start = false;
+        pMenu->bClient = false;
+        pFramework->done = true;
     }
 
     client = SDLNet_TCP_Open (&addr);
