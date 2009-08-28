@@ -281,7 +281,7 @@ void CMenu::Exit()
         yCursor = pos1;
     if (yCursor < pos1)
         yCursor = pos1;
-    pFramework->Text("Wirklich beenden ??", 225,80);
+    pFramework->Text("Wirklich beenden ??", 325,80);
     pFramework->Text("Ja", 350,pos1);
     pFramework->Text("Nein", 350,pos2);
 
