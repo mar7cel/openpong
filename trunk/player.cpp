@@ -333,13 +333,13 @@ void CPlayer::MoveBall()
         ipaddle_center_cpu = Computer.x + Computer.w / 2;
         ipaddle_location_cpu = iball_center - ipaddle_center_cpu;
 
-        if (Collision(Player,Ball) == true)
+        if (Collision(Player,Ball) == true && Ball.y > 30)
         {
             i_Ball_Speed_X = ipaddle_location / 5;
             i_Ball_Speed_Y *= -1;
             pSoundPlayer->Play();
         }
-        if (Collision(Computer,Ball) == true)
+        if (Collision(Computer,Ball) == true && Ball.y + Ball.w < 560)
         {
             i_Ball_Speed_X = ipaddle_location_cpu / 5;
             i_Ball_Speed_Y *= -1;
