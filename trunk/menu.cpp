@@ -37,6 +37,7 @@ CMenu::CMenu()
     bServer = false;
     bClient = false;
     ip = false;
+    bname = false;
 }
 CMenu::~CMenu()
 {
@@ -481,7 +482,11 @@ void CMenu::LoadSetting()
     if (setting != NULL)
     {
         int f,e,h;
-        fscanf(setting, "%d %d %d %d %s\n", &f, &e, &h, &iSpeed,name);
+
+        if (fscanf(setting, "%d %d %d %d %s \n", &f, &e, &h, &iSpeed,name) < 1)
+        {
+            cout << "Konnte Datei nicht Laden" << endl;
+        }
 
         if (f > 0 && fullscreen == false)
         {
