@@ -5,7 +5,7 @@ LDFLAGS = -O2 -s `sdl-config --libs` -lSDL_net -lSDL_mixer -lSDL_ttf
 RM   = /bin/rm -f
 OBJS = src/main.o src/client.o src/framework.o src/game.o src/menu.o src/player.o src/server.o src/sound.o src/sprite.o
 PROG = openpong
-VERS = 0.1.0
+VERS = 0.4.4
 
 .PHONY: clean distclean
 all: $(PROG)

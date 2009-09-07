@@ -107,9 +107,9 @@ void CMenu::MainMenu()
     pFramework->Text("Open Pong", 360,80);
     pFramework->Text("Wilkommen ", 320,105);
     pFramework->Text(name, 420,105);
-    pFramework->Text("Einzelspieler", 350,pos1);
+    pFramework->Text("Spieler vs. Spieler", 350,pos1);
     pFramework->Text("Spieler vs. Bot", 350,pos2);
-    pFramework->Text("Multiplayer", 350,pos3);
+    pFramework->Text("Netzwerkspiel", 350,pos3);
     pFramework->Text("Optionen", 350,pos4);
     pFramework->Text("Exit", 350,pos5);
 
@@ -254,7 +254,7 @@ void CMenu::Multiplayer()
     if (yCursor > lastpos)
         yCursor = pos1;
     firstpos = pos1;
-    pFramework->Text("Multiplayer", 360,80);
+    pFramework->Text("Netzwerkspiel", 360,80);
     pFramework->Text("Server Starten", 360,pos1);
     pFramework->Text("Zum Server Verbinden", 360,pos2);
     pFramework->Text("Zurueck", 360,pos3);
@@ -400,7 +400,7 @@ void CMenu::Control()
     {
         pFramework->Clear();
         pBack->Render();
-        pFramework->Text("Multiplayer", 360,80);
+        pFramework->Text("Netzwerkspiel", 360,80);
         pFramework->Text("Bitte IP des Servers Eingeben!", 300,pos1);
         pFramework->Flip();
         int len=0,old;
@@ -440,9 +440,10 @@ void CMenu::Control()
                     }
                     else if (g_Event.key.keysym.sym == SDLK_RETURN)
                     {
-                        if (len > 0)
+                        if (len > 0 && str[0] != '0')
                         {
                             done=1;
+                            cout << "" << str[0] << endl;
                         }
                     }
                     if (len>=100) len=100;
@@ -451,7 +452,7 @@ void CMenu::Control()
 
                         pFramework->Clear();
                         pBack->Render();
-                        pFramework->Text("Multiplayer", 360,80);
+                        pFramework->Text("Netzwerkspiel", 360,80);
                         pFramework->Text("Bitte IP des Servers Eingeben!", 300,pos1);
                         pFramework->Text(str, 300 , pos3);
                         pFramework->Flip();
@@ -527,9 +528,8 @@ void CMenu::InputName()
                 {
                     old = len;
                     if ((g_Event.key.keysym.sym <= 57 && g_Event.key.keysym.sym >= 48) ||
-                            g_Event.key.keysym.sym == 46 ||
                             (g_Event.key.keysym.sym <= 90 && g_Event.key.keysym.sym >= 65) ||
-                            (g_Event.key.keysym.sym <= 122 && g_Event.key.keysym.sym >= 97))
+                            (g_Event.key.keysym.sym <= 122 && g_Event.key.keysym.sym >= 97 ))
                     {
                         name[len]=g_Event.key.keysym.sym;
                         len++;
