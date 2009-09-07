@@ -1,0 +1,27 @@
+0.4.5 vom 07.09.2009
+
+Fixed Bug's
+
+-bei IP eingabe "0" ist das Programm abgestürzt.
+
+Änderungen
+
+-Menü Bezeichnungen wurden geändert.
+
+0.4.4	vom 30.08.2009
+
+Fixed Bug's
+
+-wenn keine ip eingegeben wurde, stürzte das spiel ab.
+-wenn keine ip eingegeben wurde und danach der Server
+gestartet wurde, konnte der nicht starten da der Port belegt war.
+-die punkte haben immer weiter gezählt, obwohl die runde herrum war.
+-kollision wurde überarbeitet, sollte jetzt besser funktionieren.
+
+Neues
+
+-pause funktion hinzugefügt.
+-einstellungen werden nun gespeichert sobald etwas geändert wurde.
+-name wird nun abgefragt und auch gespeichert sobald an den optionen
+was geändert wurde.
+
