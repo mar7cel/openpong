@@ -14,7 +14,7 @@ erhalten haben. Falls nicht, siehe <http://www.gnu.org/licenses/>.
 
 
 Benötigte Libs	:
-			libSD
+			libSDL
 			libSDL_mixer
 			libSDL_net-1.2
 			libSDL_ttf-2.0
